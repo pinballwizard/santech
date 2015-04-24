@@ -5,4 +5,43 @@
     <meta name="Keywords" content="{% for review in reviews %}{{ review.name }},{% endfor %}">
 {% endblock meta %}
 {% block body %}
+    <div class="container">
+        <button class="btn btn-primary modalButton" data-toggle="modal" data-target=".reviewModal" type="button">Оценить</button>
+        <div class="modal fade reviewModal" tabindex="-1" role="dialog" aria-labelledby="reviewModalLabel" aria-hidden="true">
+            <div class="modal-dialog text-center">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="reviewModalLabel">Оставить отзыв</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <form action="{% url 'reviews' %}" role="form" method="POST" id="reviewForm">
+                                {% csrf_token %}
+                                {{ reviewForm.non_field_errors }}
+                                <div class="col-xs-6">
+                                    <div class="form-group fieldWrapper">
+                                        {{ reviewForm.owner }}
+                                    </div>
+                                    <div class="form-group fieldWrapper">
+                                        {{ reviewForm.header }}
+                                    </div>
+                                    <div class="form-group fieldWrapper">
+                                        {{ reviewForm.grade }}
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    {{ reviewForm.text }}
+                                </div>
+                            </form>
+                        </div>
+                        <span>Спасибо за Отзыв</span>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" type="submit" form="reviewForm">Отправить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock body %}

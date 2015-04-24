@@ -56,6 +56,36 @@ class MailForm(forms.ModelForm):
         }
 
 
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ['owner', 'header', 'text', 'grade']
+        localized_fields = ('__all__',)
+        widgets = {
+            'owner': forms.TextInput(attrs={
+                'placeholder': 'Ваше имя',
+                'type': 'text',
+                'class': 'form-control',
+            }),
+            'header': forms.TextInput(attrs={
+                'placeholder': 'Заголовок',
+                'type': 'text',
+                'class': 'form-control',
+            }),
+            'grade': forms.TextInput(attrs={
+                'placeholder': 'Оценка',
+                'type': 'text',
+                'class': 'form-control',
+            }),
+            'text': forms.Textarea(attrs={
+                'placeholder': 'Введите Отзыв',
+                'type':'text',
+                'class': 'form-control',
+                'rows': 5,
+            }),
+        }
+
+
 def home(request):
     data = {
         'carousel_images': CarouselImage.objects.all(),
@@ -128,7 +158,16 @@ def reviews(request):
         'reviews': Review.objects.all(),
         'widgets': SocialWidget.objects.all(),
         'office': Office.objects.get(pk=1),
+        'reviewForm': ReviewForm(),
+        'thanks' : False,
     }
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            form.save()
+            data['thanks'] = True
+        else:
+            data['reviewForm'] = form
     return render(request, 'base/reviews.html', data)
 
 

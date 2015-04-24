@@ -29,6 +29,7 @@ class Review(models.Model):
     owner = models.CharField("Клиент", max_length=50, unique=True)
     header = models.CharField("Заголовок", max_length=20)
     text = models.CharField("Отзыв", max_length=500)
+    grade = models.IntegerField("Оценка")
 
 
 class CarouselImage(models.Model):
