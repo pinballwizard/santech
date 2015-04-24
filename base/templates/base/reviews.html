@@ -44,4 +44,23 @@
             </div>
         </div>
     </div>
+    <div class="container">
+        <h3>Отзывы</h3>
+        <div class="row">
+            {% for review in reviews %}
+                <div class="col-md-3">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <p class="panel-title">{{ review.header }}</p>
+                            <p class="panel-title text-right">{{ review.grade }}</p>
+                        </div>
+                        <div class="panel-body">
+                            <p>{{ review.owner }}</p>
+                            <p class="text-justify">{{ review.text }} {% lorem 1 %}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock body %}

@@ -20,6 +20,7 @@ class Blog(models.Model):
     name = models.CharField("Название", max_length=20, unique=True)
     image = models.ImageField("Картинка")
     text = models.TextField("Текст", max_length=20000)
+    pub_date = models.DateTimeField("Время публикации")
 
     def __str__(self):
         return self.name

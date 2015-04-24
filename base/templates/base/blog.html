@@ -5,4 +5,34 @@
     <meta name="Keywords" content="{% for blog in blogs %}{{ blog.name }},{% endfor %}">
 {% endblock meta %}
 {% block body %}
+    <div class="container text-center">
+        <div class="jumbotron">
+            <h3>Новости</h3>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            {% for blog in blogs %}
+                <div class="col-xs-12">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <p class="panel-title">{{ blog.name }}</p>
+                            <p class="text-right">{{ blog.pub_date }}</p>
+                        </div>
+                        <div class="panel-body">
+                            <div class="media">
+                                <div class="media-left media-middle">
+                                    <img src="{{ blog.image.url }}" class="media-object">
+                                </div>
+                                <div class="media-body text-justify">
+                                    {{ blog.text }}
+                                    {% lorem 3 %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock body %}
