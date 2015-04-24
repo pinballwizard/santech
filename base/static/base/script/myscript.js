@@ -2,39 +2,40 @@ $(document).ready(function() {
     $(function () {
         $('#myTab a:first').tab('show');
     });
-    $("#myNavbar").find("li").not(".dropdown").children("a").click(function(){
+    var nav = $("#myNavbar");
+    nav.find("li").not(".dropdown").children("a").click(function(){
         $(".nav").find("li").removeClass("active");
         $(this).parent().addClass("active");
         $(this).parents(".dropdown").addClass("active");
     });
-    var afterClick =  $("#myNavbar").find("a").filter(function(){
+    var afterClick =  nav.find("a").filter(function(){
         return $(this).attr("href") == window.location.pathname;
     });
     afterClick.parent().addClass("active");
     afterClick.parents(".dropdown").addClass("active");
 
-    $(".modalImage").click(function(){
-        console.log("hello")
-        $(this).siblings(".myModal").modal('show')
-    })
+    $('.modalButton').click(function(){
+        $(this).siblings('.myModal').modal('show')
+    });
 
     yandex_map();
 //    google_map();
 });
 
 function yandex_map(){
-    var longitude = $('#map').data('longitude');
-    var latitude = $('#map').data('latitude');
-    var coordinate = [longitude, latitude];
+    var map_query = $('#map');
+    var coordinate = [map_query.data('longitude'), map_query.data('latitude')];
     ymaps.ready(init);
-    var myMap, myPlacemark;
+    var myMap;
+    var placemark;
+
     function init(){
         myMap = new ymaps.Map("map", {
             center: coordinate,
             zoom: 12
         });
-        myPlacemark = new ymaps.Placemark(coordinate);
-        myMap.geoObjects.add(myPlacemark);
+        placemark = new ymaps.Placemark(coordinate);
+        myMap.geoObjects.add(placemark);
     }
 }
 

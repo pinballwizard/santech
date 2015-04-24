@@ -7,7 +7,7 @@ class CarouselImageAdmin(admin.ModelAdmin):
 
 @admin.register(Review)
 class FeatureAdmin(admin.ModelAdmin):
-    list_display = ('owner', 'header', 'text')
+    list_display = ('owner', 'header', 'text', 'grade')
 
 @admin.register(Service)
 class ServiceAdmin(admin.ModelAdmin):

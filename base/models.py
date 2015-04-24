@@ -20,6 +20,7 @@ class Blog(models.Model):
     name = models.CharField("Название", max_length=20, unique=True)
     image = models.ImageField("Картинка")
     text = models.TextField("Текст", max_length=20000)
+    pub_date = models.DateTimeField("Время публикации")
 
     def __str__(self):
         return self.name
@@ -29,6 +30,7 @@ class Review(models.Model):
     owner = models.CharField("Клиент", max_length=50, unique=True)
     header = models.CharField("Заголовок", max_length=20)
     text = models.CharField("Отзыв", max_length=500)
+    grade = models.IntegerField("Оценка")
 
 
 class CarouselImage(models.Model):
@@ -59,6 +61,7 @@ class Partner(models.Model):
 
 
 class Office(models.Model):
+    name = models.CharField("Название компании", max_length=100)
     address = models.CharField("Контактный адресс", max_length=100)
     email = models.EmailField("Контактная почта", max_length=50)
     phone_str = models.CharField("Контактный телефон (через ;)", max_length=100)
