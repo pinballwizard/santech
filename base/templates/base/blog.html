@@ -1,8 +1,8 @@
 {% extends "base/template.html" %}
 {% load staticfiles %}
 {% block meta %}
+    <meta name="Description" content="Блог и новости компании {{ office.name }}">
+    <meta name="Keywords" content="{% for blog in blogs %}{{ blog.name }},{% endfor %}">
 {% endblock meta %}
-{% block header %}
-{% endblock header %}
 {% block body %}
 {% endblock body %}

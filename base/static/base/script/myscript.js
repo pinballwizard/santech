@@ -14,9 +14,8 @@ $(document).ready(function() {
     afterClick.parents(".dropdown").addClass("active");
 
     $(".modalImage").click(function(){
-        console.log("hello")
         $(this).siblings(".myModal").modal('show')
-    })
+    });
 
     yandex_map();
 //    google_map();
