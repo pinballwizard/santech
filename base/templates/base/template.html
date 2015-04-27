@@ -21,19 +21,17 @@
         <header class="sm-header">
             <div class="container">
                 <div class="row text-center">
-                    <div class="col-md-3 col-md-offset-2">
+                    <div class="col-md-3 col-md-offset-2 big-square">
                         Petrukha Inc.
                     </div>
                     <div class="col-md-2">
-                        <button class="btn btn-default yellow-1" type="button">
-                            <a href="#">Call me back</a>
-                        </button>
-                        <br>
-                        <button class="btn yellow-1">
-                            <a href="#">Take a service</a>
-                        </button>
+                        <div class="border">
+                            <button class="btn yellow-btn" type="button">
+                                <a href="#">Call me back</a>
+                            </button>
+                        </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 big-square">
                         Phone number
                     </div>
                 </div>
@@ -53,7 +51,7 @@
                 <div class="col-md-6 col-md-offset-3">
                     <div class="collapse navbar-collapse" id="myNavbar">
                         <ul class="nav nav-pills nav-justified">
-                            <li><a href="{% url 'home' %}">О компании</a></li>
+                            <li><a href="{% url 'home' %}"><nobr>О компании</nobr></a></li>
                             <li><a href="{% url 'blog' %}">Блог</a></li>
                             <li><a href="{% url 'pricing' %}">Цены</a></li>
                             <li><a href="{% url 'reviews' %}"><nobr>Наши работы</nobr></a></li>
@@ -64,8 +62,14 @@
             </div>
         </div>
     </nav>
-    {% block body %}
-    {% endblock body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 content">
+                {% block body %}
+                {% endblock body %}
+            </div>
+        </div>
+    </div>
     <footer class="footer">
         <div class="container">
             <div class="row">

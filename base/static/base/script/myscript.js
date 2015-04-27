@@ -26,8 +26,8 @@ $(document).ready(function() {
 });
 
 function yandex_map(){
-    var map_query = $('#map');
-    var coordinate = [map_query.data('longitude'), map_query.data('latitude')];
+    var map_obj = $('#map');
+    var coordinate = [map_obj.data('longitude'), map_obj.data('latitude')];
     var maptype = map_obj.data('maptype');
     ymaps.ready(init);
     var myMap;

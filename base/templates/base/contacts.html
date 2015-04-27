@@ -5,55 +5,51 @@
 {% endblock meta %}
 {% block body %}
     <div class="page-header text-center">
-        <h3>Контакты <br>
-            <small>Вы можете позвонить нам по указанным телефонам.<br>
-                Написать нам на почту или отправить сообщение через сайт</small></h3>
+        <h3>Контакты<br>
+            <small>
+                Вы можете позвонить нам по указанным телефонам.<br>
+                Написать нам на почту или отправить сообщение через сайт
+            </small>
+        </h3>
     </div>
-    <div class="container">
+    <div id="map" data-maptype="{{ office.maptype }}" data-latitude="{{ office.latitude }}" data-longitude="{{ office.longitude }}" style="width:100%; height:400px"></div>
+    <address class="text-center">
+        Адрес: {{ office.address }}<br/>
+        Офис: {{ office.phone1 }}<br/>
+        Техник: {{ office.phone2 }}<br/>
+        Email: {{ office.email|urlize }}
+    </address>
+    <form action="{% url 'contacts' %}" role="form" method="post">
+        <h4 class="text-center">Написать нам <span class="glyphicon glyphicon-pencil"></span></h4>
+        {% csrf_token %}
+        {{ form.non_field_errors }}
         <div class="row">
             <div class="col-md-6">
-                <div id="map" data-maptype="{{ office.maptype }}" data-latitude="{{ office.latitude }}" data-longitude="{{ office.longitude }}" style="width:100%; height:400px"></div>
-            </div>
-            <div class="col-md-6 text-center">
-                <address>
-                    Адрес: {{ office.address }}<br/>
-                    Телефон: {{ office.phone|join:"," }}<br/>
-                    Email: {{ office.email|urlize }}
-                </address>
-                <div class="row">
-                    <form action="{% url 'contacts' %}" role="form" method="post">
-                        <h4>Написать нам <span class="glyphicon glyphicon-pencil"></span></h4>
-                        {% csrf_token %}
-                        {{ form.non_field_errors }}
-                        <div class="col-md-6">
-                            <div class="form-group fieldWrapper">
-                                {{ form.sender }}
-                            </div>
-                            <div class="form-group fieldWrapper">
-                                {{ form.email }}
-                            </div>
-                            <div class="form-group fieldWrapper">
-                                {{ form.subject }}
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group fieldWrapper">
-                                {{ form.message }}
-                            </div>
-                        </div>
-                        <button class="btn btn-info btn-primary btn-md contact-btn" type="submit">Отправить
-                            <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-                        </button>
-                    </form>
+                <div class="form-group fieldWrapper">
+                    {{ form.sender }}
                 </div>
-                <div class="row">
-                    {% if thank %}
-                        <div class="col-md-6 col-md-offset-3">
-                            <div class="alert alert-success">Спасибо за обратную связь!</div>
-                        </div>
-                    {% endif %}
+                <div class="form-group fieldWrapper">
+                    {{ form.email }}
+                </div>
+                <div class="form-group fieldWrapper">
+                    {{ form.subject }}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group fieldWrapper">
+                    {{ form.message }}
                 </div>
             </div>
         </div>
+        <button class="btn btn-info btn-primary btn-md contact-btn" type="submit">Отправить
+            <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+        </button>
+    </form>
+    <div class="row">
+        {% if thank %}
+            <div class="col-md-6 col-md-offset-3">
+                <div class="alert alert-success">Спасибо за обратную связь!</div>
+            </div>
+        {% endif %}
     </div>
 {% endblock body %}

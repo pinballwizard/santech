@@ -70,6 +70,7 @@ def home(request):
         'carousel_images': CarouselImage.objects.all(),
         'widgets': SocialWidget.objects.all(),
         'office': Office.objects.get(pk=1),
+        'blog': Blog.objects.get(pk=1),
     }
     return render(request, 'base/home.html', data)
 
@@ -135,7 +136,7 @@ def reviews(request):
         'widgets': SocialWidget.objects.all(),
         'office': Office.objects.get(pk=1),
         'reviewForm': ReviewForm(),
-        'thanks' : False,
+        'thanks': False,
     }
     if request.method == 'POST':
         form = ReviewForm(request.POST)

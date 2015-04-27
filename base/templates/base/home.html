@@ -7,14 +7,96 @@
 {% block header %}
     <header class="big-header">
         <div class="container">
-            Большая плашка с названием, кнопками, телефонами
+            <div class="row">
+                <div class="col-md-4 col-md-offset-2 text-center big-square">
+                    <h1>
+                        САНТЕХ-ПЕТР
+                    </h1>
+                    <small>сантехмонтаж в Красноярске</small>
+                    <br>
+                    <span>Офис: {{ office.phone1 }}</span><br>
+                    <span>Техник: {{ office.phone2 }}</span>
+                    <br>
+                    <div class="border">
+                        <button class="btn yellow-btn" type="button">
+                            <a href="#">Call me back</a>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 {% endblock header %}
 {% block body %}
-    <div class="container content">
-        <div>
+    <div class="col-md-4">
+        <div class="panel-body dark msq">
+            <h3>Водоснабжение</h3>
+            {% lorem 2 %}
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel-body medium msq">
+            <h3>Канализация</h3>
+            {% lorem 2 %}
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel-body light msq">
+            <h3>Отопление</h3>
+            {% lorem 2 %}
+        </div>
+    </div>
+    <div class="row text-center">
+        <h2 class="page-header text-center">
+            Наши работы
+        </h2>
+        <div class="col-md-4 omsq">
 
+        </div>
+        <div class="col-md-4 omsq">
+            <h3>Канализация</h3>
+            {% lorem 1 %}
+            <button type="button" class="btn">Узнать больше</button>
+        </div>
+        <div class="col-md-4 omsq">
+
+        </div>
+        <div class="col-md-4 omsq">
+            <h3>Канализация</h3>
+            {% lorem 1 %}
+        </div>
+        <div class="col-md-4 omsq">
+
+        </div>
+        <div class="col-md-4 omsq">
+            <h3>Канализация</h3>
+            {% lorem 1 %}
+        </div>
+    </div>
+    <div class="panel">
+        <div class="panel-heading">
+            <p class="panel-title">{{ blog.name }}</p>
+            <p class="text-right">{{ blog.pub_date }}</p>
+        </div>
+        <div class="panel-body">
+            {{ blog.text|safe }}
+            {% lorem 3 %}
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="panel big-square text-center">
+            <h2>
+                Не знаете с чего начать?
+            </h2>
+            <ol class="text-left">
+                <li>Оставьте заявку</li>
+                <li>Проконсультируйтесь со специалистом</li>
+                <li>Сравните условия и цены</li>
+                <li>Выберите исполнителя</li>
+            </ol>
+            <div class="border">
+                <button type="button" class="btn yellow-btn">Оставить заявку</button>
+            </div>
         </div>
     </div>
 {% endblock body %}
