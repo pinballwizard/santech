@@ -9,7 +9,7 @@ class Worker(models.Model):
     last_name = models.CharField("Фамилия", max_length=30)
     birth_day = models.DateField("День рождения")
     email = models.EmailField("Почта")
-    photo = models.ImageField("Фотография")
+    photo = models.ImageField("Фотография", upload_to='worker')
     phone = models.CharField("Телефон", max_length=100)
 
     def __str__(self):
@@ -18,24 +18,30 @@ class Worker(models.Model):
 
 class Blog(models.Model):
     name = models.CharField("Название", max_length=20, unique=True)
-    image = models.ImageField("Картинка")
+    pub_date = models.DateField("Время публикации")
     text = models.TextField("Текст", max_length=20000)
-    pub_date = models.DateTimeField("Время публикации")
 
     def __str__(self):
         return self.name
 
 
 class Review(models.Model):
+    GRADE_CHOICES = (
+        (1, '1'),
+        (2, '2'),
+        (3, '3'),
+        (4, '4'),
+        (5, '5'),
+    )
     owner = models.CharField("Клиент", max_length=50, unique=True)
     header = models.CharField("Заголовок", max_length=20)
     text = models.CharField("Отзыв", max_length=500)
-    grade = models.IntegerField("Оценка")
+    grade = models.IntegerField("Оценка", choices=GRADE_CHOICES, default=5)
 
 
 class CarouselImage(models.Model):
     image = models.ImageField("Картинка", upload_to='carousel')
-    text = models.CharField("Подпись", max_length=100)
+    text = models.CharField("Подпись", max_length=100, blank=True)
     position = models.IntegerField("Позиция", unique=True, blank=False)
 
     def __str__(self):
@@ -43,7 +49,7 @@ class CarouselImage(models.Model):
 
 
 class Service(models.Model):
-    image = models.ImageField("Изображение")
+    image = models.ImageField("Изображение", upload_to='service')
     header = models.CharField("Заголовок", max_length=100)
     text = models.TextField("Описание", max_length=1000)
 
@@ -53,7 +59,7 @@ class Service(models.Model):
 
 class Partner(models.Model):
     name = models.CharField("Название", max_length=20, unique=True)
-    logo = models.ImageField("Логотип")
+    logo = models.ImageField("Логотип", upload_to='partner')
     url = models.URLField("Ссылка на сайт")
 
     def __str__(self):
@@ -61,18 +67,25 @@ class Partner(models.Model):
 
 
 class Office(models.Model):
+    MAP_CHOICES = (
+        ('yandex#map', 'Схема'),
+        ('yandex#satellite', 'Спутник'),
+        ('yandex#hybrid', 'Гибрид'),
+        ('yandex#publicMap', 'Народная'),
+        ('yandex#publicMapHybrid', 'Народная+Гибрид'),
+    )
+
     name = models.CharField("Название компании", max_length=100)
     address = models.CharField("Контактный адресс", max_length=100)
-    email = models.EmailField("Контактная почта", max_length=50)
-    phone_str = models.CharField("Контактный телефон (через ;)", max_length=100)
+    email = models.EmailField("Контактная почта", max_length=50, blank=True)
+    phone1 = models.CharField("Телефон Офис", max_length=15, blank=True)
+    phone2 = models.CharField("Телефон Тех.поддержки", max_length=15, blank=True)
     latitude = models.CharField("Широта", max_length=10)
     longitude = models.CharField("Долгота", max_length=10)
+    maptype = models.CharField("Тип карты", max_length=30, choices=MAP_CHOICES, default='yandex#map')
 
     def coordinate(self):
         return [self.longitude, self.latitude]
-
-    def phone(self):
-        return self.phone_str.split(';')
 
     def geocode(self):
         url_str = 'https://geocode-maps.yandex.ru/1.x/?format=json&geocode=%s' % self.address

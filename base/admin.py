@@ -1,6 +1,8 @@
 from django.contrib import admin
 from base.models import *
 
+from django_summernote.admin import SummernoteModelAdmin
+
 @admin.register(CarouselImage)
 class CarouselImageAdmin(admin.ModelAdmin):
     list_display = ('text', 'position', 'image')
@@ -23,7 +25,7 @@ class WorkerAdmin(admin.ModelAdmin):
 
 @admin.register(Office)
 class OfficeAdmin(admin.ModelAdmin):
-    list_display = ('address', 'email', 'phone')
+    list_display = ('address', 'email', 'phone1', 'phone2')
     readonly_fields = ('latitude', 'longitude')
 
     def save_model(self, request, obj, form, change):
@@ -31,8 +33,8 @@ class OfficeAdmin(admin.ModelAdmin):
         obj.save()
 
 @admin.register(Blog)
-class BlogAdmin(admin.ModelAdmin):
-    list_display = ('name', 'text', 'image')
+class BlogAdmin(SummernoteModelAdmin):
+    list_display = ('name', 'pub_date')
 
 @admin.register(SocialWidget)
 class SocialWidgetAdmin(admin.ModelAdmin):

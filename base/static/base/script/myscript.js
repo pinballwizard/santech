@@ -17,6 +17,9 @@ $(document).ready(function() {
     $('.modalButton').click(function(){
         $(this).siblings('.myModal').modal('show')
     });
+    $('.editable').click(function(){
+
+    });
 
     yandex_map();
 //    google_map();
@@ -25,6 +28,7 @@ $(document).ready(function() {
 function yandex_map(){
     var map_query = $('#map');
     var coordinate = [map_query.data('longitude'), map_query.data('latitude')];
+    var maptype = map_obj.data('maptype');
     ymaps.ready(init);
     var myMap;
     var placemark;
@@ -32,7 +36,8 @@ function yandex_map(){
     function init(){
         myMap = new ymaps.Map("map", {
             center: coordinate,
-            zoom: 12
+            zoom: 12,
+            type: maptype
         });
         placemark = new ymaps.Placemark(coordinate);
         myMap.geoObjects.add(placemark);

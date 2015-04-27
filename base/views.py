@@ -3,54 +3,36 @@ from django import forms
 from base.models import *
 from django.core import mail
 
+
 class MailForm(forms.ModelForm):
-    color = {}
-    def clean(self):
-        if self.cleaned_data.get('sender'):
-            self.color['sender'] = 'has-success'
-        else:
-            self.color['sender'] = 'has-error'
-
-        if self.cleaned_data.get('email'):
-            self.color['email'] = 'has-success'
-        else:
-            self.color['email'] = 'has-error'
-
-        if self.cleaned_data.get('subject'):
-            self.color['subject'] = 'has-success'
-        else:
-            self.color['subject'] = 'has-error'
-
-        if self.cleaned_data.get('message'):
-            self.color['message'] = 'has-success'
-        else:
-            self.color['message'] = 'has-error'
-
-
     class Meta:
         model = Mail
         fields = ['sender', 'email', 'subject', 'message']
-        localized_fields = ('__all__',)
         widgets = {
             'sender': forms.TextInput(attrs={
-                'placeholder': 'Ваше имя',
+                'placeholder': 'Ваше Имя',
                 'type': 'text',
                 'class': 'form-control',
+                'required': True,
             }),
             'email': forms.EmailInput(attrs={
                 'placeholder': 'Ваш Email',
                 'type': 'email',
                 'class': 'form-control',
+                'required': True,
             }),
             'subject': forms.TextInput(attrs={
                 'placeholder': 'Введите тему',
                 'type': 'text',
                 'class': 'form-control',
+                'required': True,
+
             }),
             'message': forms.Textarea(attrs={
                 'placeholder': 'Введите сообщение',
-                'type':'text',
+                'type': 'text',
                 'class': 'form-control',
+                'required': True,
                 'rows': 5,
             }),
         }
@@ -60,27 +42,24 @@ class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
         fields = ['owner', 'header', 'text', 'grade']
-        localized_fields = ('__all__',)
         widgets = {
             'owner': forms.TextInput(attrs={
                 'placeholder': 'Ваше имя',
                 'type': 'text',
                 'class': 'form-control',
+                'required': True,
             }),
             'header': forms.TextInput(attrs={
                 'placeholder': 'Заголовок',
                 'type': 'text',
                 'class': 'form-control',
-            }),
-            'grade': forms.TextInput(attrs={
-                'placeholder': 'Оценка',
-                'type': 'text',
-                'class': 'form-control',
+                'required': True,
             }),
             'text': forms.Textarea(attrs={
                 'placeholder': 'Введите Отзыв',
                 'type':'text',
                 'class': 'form-control',
+                'required': True,
                 'rows': 5,
             }),
         }
@@ -123,12 +102,9 @@ def contacts(request):
         'widgets': SocialWidget.objects.all(),
         'form': MailForm(),
         'thank': False,
-        'color': {},
     }
     if request.method == 'POST':
         form = MailForm(request.POST)
-        form.full_clean()
-        data['color'] = form.color
         if form.is_valid():
             sender = form.cleaned_data['sender']
             email = form.cleaned_data['email']

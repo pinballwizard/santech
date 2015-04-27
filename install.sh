@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sudo pip3 install pillow django uwsgi django-admin-bootstrapped 
+
 # Установка необходимых компонентов для RHEL7
 sudo yum -y check-update
 sudo yum -y install bash-completion

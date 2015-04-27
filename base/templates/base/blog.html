@@ -16,19 +16,12 @@
                 <div class="col-xs-12">
                     <div class="panel">
                         <div class="panel-heading">
-                            <p class="panel-title">{{ blog.name }}</p>
-                            <p class="text-right">{{ blog.pub_date }}</p>
+                            <h2 class="panel-title">{{ blog.name }}</h2>
+                            <span class="text-right">{{ blog.pub_date }}</span>
                         </div>
                         <div class="panel-body">
-                            <div class="media">
-                                <div class="media-left media-middle">
-                                    <img src="{{ blog.image.url }}" class="media-object">
-                                </div>
-                                <div class="media-body text-justify">
-                                    {{ blog.text }}
-                                    {% lorem 3 %}
-                                </div>
-                            </div>
+                            {{ blog.text|safe }}
+                            {% lorem 3 %}
                         </div>
                     </div>
                 </div>

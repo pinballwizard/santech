@@ -4,6 +4,7 @@ from base import views
 from django.views.generic import TemplateView
 from django.conf.urls.static import static
 from django.conf import settings
+from django.contrib.sitemaps.views import sitemap
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
@@ -15,6 +16,8 @@ urlpatterns = [
     url(r'^contacts', views.contacts, name='contacts'),
     url(r'^company', views.company, name='company'),
     url(r'^workers', views.workers, name='workers'),
-    url(r'^robots.txt$', TemplateView.as_view(template_name='base/robots.txt'), name='robots'),
-    url(r'^sitemap.xml$', TemplateView.as_view(template_name='base/sitemap.xml'), name='sitemap'),
+    url(r'^summernote/', include('django_summernote.urls')),
+
+    # url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+    url(r'^robots\.txt$', TemplateView.as_view(template_name='base/robots.txt'), name='robots'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
