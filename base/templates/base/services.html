@@ -5,4 +5,19 @@
     <meta name="Keywords" content="{% for service in services %}{{ service.header }},{% endfor %}">
 {% endblock meta %}
 {% block body %}
+    <div class="jumbotron text-center">
+        <h3>Предоставляемые Услуги</h3>
+    </div>
+    {% for service in services %}
+        <div class="panel">
+            <div class="panel-heading">
+                <h2 class="panel-title text-center">{{ service.header }}</h2>
+            </div>
+            <div class="panel-body">
+                <img class="img-responsive" src="{{ service.image.url }}" height="auto" width="auto"/>
+                <p class="text-justify">{{ service.text|truncatewords:50 }}</p>
+                <button class="btn btn-primary pull-right" type="button">Читать далее</button>
+            </div>
+        </div>
+    {%  endfor %}
 {% endblock body %}

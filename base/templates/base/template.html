@@ -22,17 +22,17 @@
             <div class="container">
                 <div class="row text-center">
                     <div class="col-md-3 col-md-offset-2 big-square">
-                        Petrukha Inc.
+                        {{ office.name }}
                     </div>
                     <div class="col-md-2">
                         <div class="border">
-                            <button class="btn yellow-btn" type="button">
-                                <a href="#">Call me back</a>
-                            </button>
+                            <a href="{% url 'contacts' %}">
+                                <button class="btn yellow-btn" type="button">Оставить заявку</button>
+                            </a>
                         </div>
                     </div>
                     <div class="col-md-3 big-square">
-                        Phone number
+                        {{ office.phone1 }}
                     </div>
                 </div>
             </div>
@@ -52,7 +52,8 @@
                     <div class="collapse navbar-collapse" id="myNavbar">
                         <ul class="nav nav-pills nav-justified">
                             <li><a href="{% url 'home' %}"><nobr>О компании</nobr></a></li>
-                            <li><a href="{% url 'blog' %}">Блог</a></li>
+                            <li><a href="{% url 'blog' %}">Новости</a></li>
+                            <li><a href="{% url 'services' %}">Услуги</a></li>
                             <li><a href="{% url 'pricing' %}">Цены</a></li>
                             <li><a href="{% url 'reviews' %}"><nobr>Наши работы</nobr></a></li>
                             <li><a href="{% url 'contacts' %}">Контакты</a></li>
@@ -64,7 +65,21 @@
     </nav>
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2 content">
+            <div class="col-md-2">
+                <div class="panel big-square text-center">
+                    <h2>Не знаете с чего начать?</h2>
+                    <ol class="text-left">
+                        <li>Оставьте заявку</li>
+                        <li>Проконсультируйтесь со специалистом</li>
+                        <li>Сравните условия и цены</li>
+                        <li>Выберите исполнителя</li>
+                    </ol>
+                    <div class="border">
+                        <button type="button" class="btn yellow-btn">Оставить заявку</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 content">
                 {% block body %}
                 {% endblock body %}
             </div>
@@ -74,7 +89,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-3 hidden-xs hidden-sm col-md-offset-2">
-                    ООО "Сантех"<br>
+                    {{ office.name }}<br>
                     Адрес: {{ office.address }}<br>
                     Телефон: {{ office.phone1 }}
                 </div>
@@ -85,7 +100,7 @@
                     {% endfor %}
                 </div>
                 <div class="col-md-3 col-xs-6 hidden-xs hidden-sm text-right">
-                    <span>2015 © ООО "Сантех"<br> created by
+                    <span>2015<br> created by
                         <a href="https://github.com/craby-c">craby</a> &
                         <a href="https://github.com/pinballwizard">pinballwizard</a>
                     </span>

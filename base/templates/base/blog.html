@@ -19,4 +19,21 @@
             </div>
         </div>
     {% endfor %}
+    <div class="col-md-12 text-center">
+        <ul class="pagination pagination-lg">
+            <li class="previous">
+                <a href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            {% for number in blog_count %}
+                <li><a href="#">{{ number }}</a></li>
+            {% endfor %}
+            <li class="next">
+                <a href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </div>
 {% endblock body %}

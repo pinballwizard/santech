@@ -50,8 +50,8 @@ class CarouselImage(models.Model):
 
 class Service(models.Model):
     image = models.ImageField("Изображение", upload_to='service')
-    header = models.CharField("Заголовок", max_length=100)
-    text = models.TextField("Описание", max_length=1000)
+    header = models.CharField("Заголовок", max_length=20, unique=True)
+    text = models.TextField("Описание", blank=True)
 
     def __str__(self):
         return self.header
