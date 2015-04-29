@@ -9,18 +9,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4 col-md-offset-2 text-center big-square">
-                    <h1>
-                        САНТЕХ-ПЕТР
-                    </h1>
-                    <small>сантехмонтаж в Красноярске</small>
-                    <br>
+                    <h1>{{ office.name }}</h1>
+                    <small>Сантехмонтаж в Красноярске</small><br>
                     <span>Офис: {{ office.phone1 }}</span><br>
-                    <span>Техник: {{ office.phone2 }}</span>
-                    <br>
+                    <span>Техник: {{ office.phone2 }}</span><br>
                     <div class="border">
-                        <button class="btn yellow-btn" type="button">
-                            <a href="#">Call me back</a>
-                        </button>
+                        <a href="{% url 'contacts' %}">
+                            <button class="btn yellow-btn" type="button">Оставить заявку</button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -31,72 +27,44 @@
     <div class="col-md-4">
         <div class="panel-body dark msq">
             <h3>Водоснабжение</h3>
-            {% lorem 2 %}
+            {% lorem 1 %}
         </div>
     </div>
     <div class="col-md-4">
         <div class="panel-body medium msq">
             <h3>Канализация</h3>
-            {% lorem 2 %}
+            {% lorem 1 %}
         </div>
     </div>
     <div class="col-md-4">
         <div class="panel-body light msq">
             <h3>Отопление</h3>
-            {% lorem 2 %}
+            {% lorem 1 %}
         </div>
     </div>
     <div class="row text-center">
-        <h2 class="page-header text-center">
-            Наши работы
-        </h2>
-        <div class="col-md-4 omsq">
-
-        </div>
-        <div class="col-md-4 omsq">
-            <h3>Канализация</h3>
-            {% lorem 1 %}
-            <button type="button" class="btn">Узнать больше</button>
-        </div>
-        <div class="col-md-4 omsq">
-
-        </div>
-        <div class="col-md-4 omsq">
-            <h3>Канализация</h3>
-            {% lorem 1 %}
-        </div>
-        <div class="col-md-4 omsq">
-
-        </div>
-        <div class="col-md-4 omsq">
-            <h3>Канализация</h3>
-            {% lorem 1 %}
-        </div>
+        <h2 class="col-md-12 page-header text-center">Виды работ</h2>
+        {% for service in services %}
+            <div class="col-md-4 omsq">
+                <img class="img-responsive" src="{{ service.image.url }}" height="auto" width="auto"/>
+            </div>
+            <div class="col-md-4 omsq">
+                <h3>{{ service.header }}</h3>
+                <p class="text-justify">{{ service.text|truncatewords:20 }}</p>
+            </div>
+        {% endfor %}
     </div>
-    <div class="panel">
-        <div class="panel-heading">
-            <p class="panel-title">{{ blog.name }}</p>
-            <p class="text-right">{{ blog.pub_date }}</p>
-        </div>
-        <div class="panel-body">
-            {{ blog.text|safe }}
-            {% lorem 3 %}
-        </div>
-    </div>
-    <div class="col-md-12">
-        <div class="panel big-square text-center">
-            <h2>
-                Не знаете с чего начать?
-            </h2>
-            <ol class="text-left">
-                <li>Оставьте заявку</li>
-                <li>Проконсультируйтесь со специалистом</li>
-                <li>Сравните условия и цены</li>
-                <li>Выберите исполнителя</li>
-            </ol>
-            <div class="border">
-                <button type="button" class="btn yellow-btn">Оставить заявку</button>
+    <h2 class="text-center">Новости</h2>
+    {% for blog in blogs %}
+        <div class="panel">
+            <div class="panel-heading">
+                <p class="panel-title">{{ blog.name }}</p>
+                <p class="text-right">{{ blog.pub_date }}</p>
+            </div>
+            <div class="panel-body">
+                {{ blog.text|safe|truncatewords_html:100 }}
+                <button class="btn btn-primary pull-right" type="button">Читать далее</button>
             </div>
         </div>
-    </div>
+    {% endfor %}
 {% endblock body %}

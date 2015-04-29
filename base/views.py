@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django import forms
 from base.models import *
 from django.core import mail
-
+from random import sample
 
 class MailForm(forms.ModelForm):
     class Meta:
@@ -70,7 +70,8 @@ def home(request):
         'carousel_images': CarouselImage.objects.all(),
         'widgets': SocialWidget.objects.all(),
         'office': Office.objects.get(pk=1),
-        'blog': Blog.objects.get(pk=1),
+        'blogs': Blog.objects.order_by('pub_date')[:3],
+        'services': sample(list(Service.objects.all()), 3)
     }
     return render(request, 'base/home.html', data)
 
@@ -80,6 +81,7 @@ def blog(request):
         'blogs': Blog.objects.all(),
         'widgets': SocialWidget.objects.all(),
         'office': Office.objects.get(pk=1),
+        'blog_count': range(1, round(Blog.objects.count()/1)+1, 1),
     }
     return render(request, 'base/blog.html', data)
 
