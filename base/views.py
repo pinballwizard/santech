@@ -81,7 +81,7 @@ def blog(request):
         'blogs': Blog.objects.all(),
         'widgets': SocialWidget.objects.all(),
         'office': Office.objects.get(pk=1),
-        'blog_count': range(1, round(Blog.objects.count()/1)+1, 1),
+        'blog_count': range(1, round(Blog.objects.count()/10)+1, 1),
     }
     return render(request, 'base/blog.html', data)
 
