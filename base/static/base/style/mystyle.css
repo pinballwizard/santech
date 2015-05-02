@@ -32,7 +32,7 @@ header{
 }
 nav{
     margin: 15px 0;
-    font-size: 12px;
+    font-size: 14px;
 }
 .navbar{
     min-height: 0;
@@ -76,7 +76,8 @@ a:active{
     border-radius: 0;
     min-width: 100%;
     font-size: 12px;
-    outline: none;
+    outline: 0;
+    border: none;
 }
 .border{
     display: inline-block;
@@ -98,7 +99,9 @@ a:active{
 .msq{
     color: #ffffff;
     border-bottom: 10px solid transparent;
+    margin-bottom: 30px;
 }
+
 .dark{
     background-color: rgb(240,100,0);
 }
@@ -118,10 +121,18 @@ a:active{
     cursor: pointer;
 }
 .omsq:nth-child(2n){
-    background:rgb(240,120,0);
+    background:rgb(240,160,0);
+    padding: 0;
 }
 
 ol{
-    font-size: 16px;
+    font-size: 14px;
+    padding-left: 20px;
 }
-
+.img-responsive{
+    height: 100%;
+    width: 100%;
+}
+.m-footer{
+    text-align: center;
+}
