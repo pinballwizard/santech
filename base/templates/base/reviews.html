@@ -47,8 +47,14 @@
             </div>
         </div>
     </div>
-    <h3 class="text-center">Отзывы</h3>
     <div class="row">
+        <h3 class="text-center">Наши работы</h3>
+        {% for project in projects %}
+            {{ project.image.url }}
+        {% endfor %}
+    </div>
+    <div class="row">
+        <h3 class="text-center">Отзывы</h3>
         {% for review in reviews %}
             <div class="col-md-4">
                 <div class="panel">

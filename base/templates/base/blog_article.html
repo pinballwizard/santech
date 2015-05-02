@@ -1,0 +1,20 @@
+{% extends "base/template.html" %}
+{% load staticfiles %}
+{% block meta %}
+    <meta name="Description" content="Новости компании {{ office.name }}">
+    <meta name="Keywords" content="{{ blog.name }}">
+{% endblock meta %}
+{% block body %}
+    <div class="panel">
+        <div class="panel-heading">
+            <h2 class="panel-title">{{ blog.name }}</h2>
+            <span class="text-right">{{ blog.pub_date }}</span>
+        </div>
+        <div class="panel-body">
+            {{ blog.text|safe }}
+            <a href="{% url 'blog' %}">
+                <button class="btn btn-primary pull-right" type="button">Назад</button>
+            </a>
+        </div>
+    </div>
+{% endblock body %}

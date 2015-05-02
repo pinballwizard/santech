@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response, redirect
 from django import forms
 from base.models import *
 from django.core import mail
-from random import sample
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 class MailForm(forms.ModelForm):
     class Meta:
@@ -67,33 +67,65 @@ class ReviewForm(forms.ModelForm):
 
 def home(request):
     data = {
-        'carousel_images': CarouselImage.objects.all(),
+        # 'carousel_images': CarouselImage.objects.all(),
         'widgets': SocialWidget.objects.all(),
         'office': Office.objects.get(pk=1),
-        'blogs': Blog.objects.order_by('pub_date')[:3],
-        'services': sample(list(Service.objects.all()), 3)
+        'blogs': Blog.objects.order_by('-pub_date')[:3],
+        'services': Service.objects.order_by('?')[:3]
     }
     return render(request, 'base/home.html', data)
 
 
 def blog(request):
+    blog_list = Blog.objects.order_by('-pub_date')
+    paginator = Paginator(blog_list, 1)
+
+    if request.GET.get('blog'):
+        blog_article = request.GET.get('blog')
+        try:
+            blogs = Blog.objects.get(pk=blog_article)
+        except PageNotAnInteger:
+            blogs = paginator.page(1)
+        data = {
+            'blogs': blogs,
+            'widgets': SocialWidget.objects.all(),
+            'office': Office.objects.get(pk=1),
+        }
+        return redirect('blog_article')
+    else:
+        page = request.GET.get('page')
+        try:
+            blogs = paginator.page(page)
+        except PageNotAnInteger:
+            blogs = paginator.page(1)
+        except EmptyPage:
+            blogs = paginator.page(paginator.num_pages)
+
     data = {
-        'blogs': Blog.objects.all(),
+        'blogs': blogs,
         'widgets': SocialWidget.objects.all(),
         'office': Office.objects.get(pk=1),
-        'blog_count': range(1, round(Blog.objects.count()/10)+1, 1),
     }
     return render(request, 'base/blog.html', data)
 
 
-def company(request):
+def blog_article(request, article):
     data = {
-        'partners': Partner.objects.all(),
+        'blog': Blog.objects.get(pk=article),
         'widgets': SocialWidget.objects.all(),
         'office': Office.objects.get(pk=1),
-        # 'about_company': Blog.objects.get(name="about_company"),
     }
-    return render(request, 'base/company.html', data)
+    return render(request, 'base/blog_article.html', data)
+
+
+# def company(request):
+#     data = {
+#         'partners': Partner.objects.all(),
+#         'widgets': SocialWidget.objects.all(),
+#         'office': Office.objects.get(pk=1),
+#         # 'about_company': Blog.objects.get(name="about_company"),
+#     }
+#     return render(request, 'base/company.html', data)
 
 
 def contacts(request):
@@ -138,6 +170,8 @@ def reviews(request):
         'widgets': SocialWidget.objects.all(),
         'office': Office.objects.get(pk=1),
         'reviewForm': ReviewForm(),
+        # 'projects': Project.objects.select_related('projectimage__image').all(),
+        'projects_images': ProjectImage.objects.all(),
         'thanks': False,
     }
     if request.method == 'POST':
@@ -157,6 +191,14 @@ def services(request):
         'office': Office.objects.get(pk=1),
     }
     return render(request, 'base/services.html', data)
+
+def services_article(request, article):
+    data = {
+        'service': Service.objects.get(pk=article),
+        'widgets': SocialWidget.objects.all(),
+        'office': Office.objects.get(pk=1),
+    }
+    return render(request, 'base/services_article.html', data)
 
 
 def workers(request):

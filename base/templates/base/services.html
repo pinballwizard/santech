@@ -16,7 +16,9 @@
             <div class="panel-body">
                 <img class="img-responsive" src="{{ service.image.url }}" height="auto" width="auto"/>
                 <p class="text-justify">{{ service.text|truncatewords:50 }}</p>
-                <button class="btn btn-primary pull-right" type="button">Читать далее</button>
+                <a href="{% url 'services_article' service.pk %}">
+                    <button class="btn btn-primary pull-right" type="button">Читать далее</button>
+                </a>
             </div>
         </div>
     {%  endfor %}

@@ -3,9 +3,14 @@ from base.models import *
 
 from django_summernote.admin import SummernoteModelAdmin
 
-@admin.register(CarouselImage)
-class CarouselImageAdmin(admin.ModelAdmin):
-    list_display = ('text', 'position', 'image')
+@admin.register(ProjectImage)
+class ProjectImageAdmin(admin.ModelAdmin):
+    model = ProjectImage
+    list_display = ('project', 'header', 'text', 'image')
+
+@admin.register(Project)
+class ProjectAdmin(admin.ModelAdmin):
+    list_display = ('name',)
 
 @admin.register(Review)
 class FeatureAdmin(admin.ModelAdmin):
@@ -15,9 +20,9 @@ class FeatureAdmin(admin.ModelAdmin):
 class ServiceAdmin(admin.ModelAdmin):
     list_display = ('header', 'text')
 
-@admin.register(Partner)
-class PartnerAdmin(admin.ModelAdmin):
-    list_display = ('name', 'logo')
+# @admin.register(Partner)
+# class PartnerAdmin(admin.ModelAdmin):
+#     list_display = ('name', 'logo')
 
 @admin.register(Worker)
 class WorkerAdmin(admin.ModelAdmin):

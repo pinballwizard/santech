@@ -9,32 +9,44 @@
         <h3>Новости</h3>
     </div>
     {% for blog in blogs %}
-        <div class="panel">
-            <div class="panel-heading">
-                <h2 class="panel-title">{{ blog.name }}</h2>
-                <span class="text-right">{{ blog.pub_date }}</span>
-            </div>
-            <div class="panel-body">
-                {{ blog.text|safe }}
-                <button class="btn btn-primary pull-right" type="button">Читать далее</button>
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="panel-heading">
+                    <h2 class="panel-title">{{ blog.name }}</h2>
+                    <span class="text-right">{{ blog.pub_date }}</span>
+                </div>
+                <div class="panel-body">
+                    {{ blog.text|safe|truncatewords_html:50 }}
+                    <a href="{% url 'blog_article' blog.pk %}">
+                        <button class="btn btn-primary pull-right" type="button">Читать далее</button>
+                    </a>
+                </div>
             </div>
         </div>
     {% endfor %}
     <div class="col-md-12 text-center">
-        <ul class="pagination pagination-lg">
-            <li class="previous">
-                <a href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            {% for number in blog_count %}
-                <li><a href="#">{{ number }}</a></li>
-            {% endfor %}
-            <li class="next">
-                <a href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
+        <div class="pagination">
+            <span class="step-links">
+                <ul class="pagination pagination-lg">
+                    {% if blogs.has_previous %}
+                        <li class="previous">
+                            <a href="?page={{ blogs.previous_page_number }}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% for page in blogs.paginator.page_range %}
+                        <li {% if page == blogs.number %}class="active"{% endif %}><a href="?page={{ page }}">{{ page }}</a></li>
+                    {% endfor %}
+                    {% if blogs.has_next %}
+                        <li class="next">
+                            <a href="?page={{ blogs.next_page_number }}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </span>
+        </div>
     </div>
 {% endblock body %}
