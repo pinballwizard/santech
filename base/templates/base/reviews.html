@@ -5,53 +5,54 @@
     <meta name="Keywords" content="{% for review in reviews %}{{ review.name }},{% endfor %}">
 {% endblock meta %}
 {% block body %}
-    <button class="btn btn-primary modalButton" data-toggle="modal" data-target=".reviewModal" type="button">Оценить</button>
-    <div class="modal fade reviewModal" tabindex="-1" role="dialog" aria-labelledby="reviewModalLabel" aria-hidden="true">
-        <div class="modal-dialog text-center">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="reviewModalLabel">Оставить отзыв</h4>
-                </div>
-                <div class="modal-body">
-                    <form action="{% url 'reviews' %}" role="form" method="POST" id="reviewForm">
-                        {% csrf_token %}
-                        {{ reviewForm.non_field_errors }}
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <div class="form-group fieldWrapper">
-                                    {{ reviewForm.owner }}
-                                </div>
-                                <div class="form-group fieldWrapper">
-                                    {{ reviewForm.header }}
-                                </div>
-                                <div class="form-group fieldWrapper">
-                                    {{ reviewForm.grade }}
-                                    <span class="review-glyph glyphicon glyphicon-star"></span>
-                                    <span class="review-glyph glyphicon glyphicon-star"></span>
-                                    <span class="review-glyph glyphicon glyphicon-star"></span>
-                                    <span class="review-glyph glyphicon glyphicon-star"></span>
-                                    <span class="review-glyph glyphicon glyphicon-star"></span>
-                                </div>
-                            </div>
-                            <div class="col-xs-6">
-                                {{ reviewForm.text }}
-                            </div>
-                        </div>
-                    </form>
-                    <span>Благодарим за отзыв!</span>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" type="submit" form="reviewForm">Отправить</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="row">
         <h3 class="text-center">Наши работы</h3>
-        {% for project in projects %}
-            {{ project.image.url }}
-        {% endfor %}
+        <div class="row">
+            {% for project in projects %}
+                <a href="#" data-toggle="modal" data-target=".{{ project.pk }}Modal">
+                    <div class="col-md-3">
+                        <img src="{{ project.face_image.url }}" class="img-responsive">
+                        <div class="modal fade {{ project.pk }}Modal" tabindex="-1" role="dialog" aria-labelledby="projectModalLabel" aria-hidden="true">
+                            <div class="modal-dialog text-center modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="projectModalLabel">{{ project.name }}</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                                            <div class="carousel-inner" role="listbox">
+                                                {% for image in project.image %}
+                                                    <div class="item {{forloop.first|yesno:'active,'}}">
+                                                        <img class="img-responsive" src="{{image.image.url}}"/>
+                                                        <h2>{{ image.text }}</h2>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                                                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                                <span class="sr-only">Previous</span>
+                                            </a>
+                                            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                                                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                                <span class="sr-only">Next</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <div class="carousel-indicators">
+                                            {% for image in project.image %}
+                                                <img src="{{ image.image.url }}" height="10%" width="10%" class="img-thumbnail" data-target="#myCarousel" data-slide-to="{{forloop.counter0}}" class={{forloop.first|yesno:"active,"}}>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
     </div>
     <div class="row">
         <h3 class="text-center">Отзывы</h3>

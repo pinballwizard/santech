@@ -69,40 +69,59 @@
                 {% block body %}
                 {% endblock body %}
             </div>
-        </div>
-        <div class="col-md-2 col-md-offset-10 navbar-fixed-bottom">
-            <div class="panel text-center">
-                <button type="button" class="yellow-btn btn" data-toggle="modal" data-target="#helpModal">
-                    Не знаете с чего начать?
-                    <span class="glyphicon glyphicon-hand-up" aria-hidden="true"></span>
-                </button>
-                <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="helpModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-sm">
+            <div class="col-md-2 navbar-fixed-bottom">
+                <button class="btn yellow-btn modalButton" data-toggle="modal" data-target=".reviewModal" type="button">Оценить нас</button>
+                <div class="modal fade reviewModal" tabindex="-1" role="dialog" aria-labelledby="reviewModalLabel" aria-hidden="true">
+                    <div class="modal-dialog text-center">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h3 class="modal-title">Не знаете с чего начать?</h3>
+                                <h4 class="modal-title" id="reviewModalLabel">Оставить отзыв</h4>
                             </div>
                             <div class="modal-body">
-                                <ol class="text-left">
-                                    <li>Оставьте заявку</li>
-                                    <li>Проконсультируйтесь со специалистом</li>
-                                    <li>Сравните условия и цены</li>
-                                    <li>Закажите услугу</li>
-                                </ol>
+                                <form action="{% url 'reviews' %}" role="form" method="POST" id="reviewForm">
+                                    {% csrf_token %}
+                                    {{ reviewForm.non_field_errors }}
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <div class="form-group fieldWrapper">
+                                                {{ reviewForm.owner }}
+                                            </div>
+                                            <div class="form-group fieldWrapper">
+                                                {{ reviewForm.header }}
+                                            </div>
+                                            <div class="form-group fieldWrapper">
+                                                {{ reviewForm.grade }}
+                                                <span class="review-glyph glyphicon glyphicon-star"></span>
+                                                <span class="review-glyph glyphicon glyphicon-star"></span>
+                                                <span class="review-glyph glyphicon glyphicon-star"></span>
+                                                <span class="review-glyph glyphicon glyphicon-star"></span>
+                                                <span class="review-glyph glyphicon glyphicon-star"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            {{ reviewForm.text }}
+                                        </div>
+                                    </div>
+                                </form>
+                                {% if thanks %}
+                                    <span>Благодарим за отзыв!</span>
+                                {% endif %}
                             </div>
-                            <div class="modal-footer m-footer">
-                                <div class="border">
-                                    <a href="{% url 'contacts' %}">
-                                        <button type="button" class="btn yellow-btn">
-                                            Оставить заявку
-                                        </button>
-                                    </a>
-                                </div>
+                            <div class="modal-footer">
+                                <button class="btn yellow-btn" type="submit" form="reviewForm">Отправить</button>
                             </div>
-                        </div><!-- /.modal-content -->
-                    </div><!-- /.modal-dialog -->
-                </div><!-- /.modal -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 col-md-offset-10 navbar-fixed-bottom">
+                <div class="text-center">
+                    <button type="button" class="yellow-btn btn call-popover" data-content="{{ ptext }}" data-toggle="popover">
+                        Не знаете с чего начать?
+                        <span class="glyphicon glyphicon-hand-up" aria-hidden="true"></span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>

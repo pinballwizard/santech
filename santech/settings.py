@@ -54,9 +54,16 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'django.middleware.common.BrokenLinkEmailsMiddleware',
 )
 
 ROOT_URLCONF = 'santech.urls'
+
+ADMINS = (('Vasiliy', 'menstenebris@gmail.com'),)
+
+MANAGERS = (('Vasiliy', 'menstenebris@gmail.com'))
+
+SERVER_EMAIL = 'santech@localhost'
 
 TEMPLATES = [
     {
