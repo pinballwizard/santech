@@ -21,7 +21,7 @@
         <header class="sm-header">
             <div class="container">
                 <div class="row text-center">
-                    <div class="col-md-3 col-md-offset-2 big-square">
+                    <div class="col-md-3 col-md-offset-2 big-square firm-name">
                         {{ office.name }}
                     </div>
                     <div class="col-md-2">
@@ -31,8 +31,9 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-3 big-square">
-                        {{ office.phone1 }}
+                    <div class="col-md-3 big-square phone">
+                        {{ office.phone1 }} <br>
+                        {{ office.phone2 }}
                     </div>
                 </div>
             </div>
@@ -70,7 +71,7 @@
                 {% endblock body %}
             </div>
         </div>
-        <div class="col-md-2 col-md-offset-10 navbar-fixed-bottom">
+        <div class="col-md-2 navbar-fixed-bottom">
             <div class="panel text-center">
                 <button type="button" class="yellow-btn btn" data-toggle="modal" data-target="#helpModal">
                     Не знаете с чего начать?
@@ -98,6 +99,57 @@
                                             Оставить заявку
                                         </button>
                                     </a>
+                                </div>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+            </div>
+        </div>
+        <div class="col-md-2 col-md-offset-10 navbar-fixed-bottom">
+            <div class="panel text-center">
+                <button type="button" class="yellow-btn btn" data-toggle="modal" data-target="#reviewModal">
+                    Оставить отзыв
+                    <span class="glyphicon glyphicon-hand-up" aria-hidden="true"></span>
+                </button>
+                <div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="reviewModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h3 class="modal-title">Оцените нашу работу</h3>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{% url 'reviews' %}" role="form" method="POST" id="reviewForm">
+                                    {% csrf_token %}
+                                    {{ reviewForm.non_field_errors }}
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <div class="form-group fieldWrapper">
+                                                {{ reviewForm.owner }}
+                                            </div>
+                                            <div class="form-group fieldWrapper">
+                                                {{ reviewForm.header }}
+                                            </div>
+                                            <div class="form-group fieldWrapper">
+                                                {{ reviewForm.grade }}
+                                                <span class="review-glyph glyphicon glyphicon-star"></span>
+                                                <span class="review-glyph glyphicon glyphicon-star"></span>
+                                                <span class="review-glyph glyphicon glyphicon-star"></span>
+                                                <span class="review-glyph glyphicon glyphicon-star"></span>
+                                                <span class="review-glyph glyphicon glyphicon-star"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            {{ reviewForm.text }}
+                                        </div>
+                                    </div>
+                                </form>
+                                <span>Благодарим за отзыв!</span>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="border">
+                                    <button class="btn yellow-btn" type="submit" form="reviewForm">Отправить</button>
                                 </div>
                             </div>
                         </div><!-- /.modal-content -->

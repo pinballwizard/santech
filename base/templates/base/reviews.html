@@ -5,7 +5,23 @@
     <meta name="Keywords" content="{% for review in reviews %}{{ review.name }},{% endfor %}">
 {% endblock meta %}
 {% block body %}
-    <button class="btn btn-primary modalButton" data-toggle="modal" data-target=".reviewModal" type="button">Оценить</button>
+    <div role="tabpanel">
+        <!-- Навигационные вкладки -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#works" aria-controls="works" role="tab" data-toggle="tab">Работы</a></li>
+            <li role="presentation"><a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab">Отзывы</a></li>
+        </ul>
+        <!-- Вкладки панелей -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="works">
+
+            </div>
+            <div role="tabpanel" class="tab-pane" id="reviews">
+
+            </div>
+        </div>
+    </div>
+    <!--<button class="btn btn-primary modalButton" data-toggle="modal" data-target=".reviewModal" type="button">Оценить</button>
     <div class="modal fade reviewModal" tabindex="-1" role="dialog" aria-labelledby="reviewModalLabel" aria-hidden="true">
         <div class="modal-dialog text-center">
             <div class="modal-content">
@@ -73,5 +89,5 @@
                 </div>
             </div>
         {% endfor %}
-    </div>
+    </div>-->
 {% endblock body %}
