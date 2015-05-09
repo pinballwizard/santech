@@ -165,13 +165,33 @@ def pricing(request):
 
 
 def reviews(request):
+    popover_text = '''<div class="modal-body">
+                            <ol class="text-left">
+                                <li>Оставьте заявку</li>
+                                <li>Проконсультируйтесь со специалистом</li>
+                                <li>Сравните условия и цены</li>
+                                <li>Закажите услугу</li>
+                            </ol>
+                        </div>
+                        <div class="modal-footer m-footer">
+                            <div class="border">
+                                <a href="{% url 'contacts' %}">
+                                    <button type="button" class="btn yellow-btn">Оставить заявку</button>
+                                </a>
+                            </div>
+                        </div>'''
+    p = []
+    projects = Project.objects.all()
+    for project1 in projects:
+        project1.image = ProjectImage.objects.all().filter(project__name=project1.name)
     data = {
         'reviews': Review.objects.all(),
         'widgets': SocialWidget.objects.all(),
         'office': Office.objects.get(pk=1),
         'reviewForm': ReviewForm(),
-        # 'projects': Project.objects.select_related('projectimage__image').all(),
-        'projects_images': ProjectImage.objects.all(),
+        'projects': projects,
+        'ptext': popover_text,
+        # 'projects_images': ProjectImage.objects.select_related().all(),
         'thanks': False,
     }
     if request.method == 'POST':

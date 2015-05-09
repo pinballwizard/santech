@@ -41,6 +41,7 @@ class Review(models.Model):
 
 class Project(models.Model):
     name = models.CharField("Название проекта", max_length=100)
+    face_image = models.ImageField("Заставка")
 
 
 class ProjectImage(models.Model):

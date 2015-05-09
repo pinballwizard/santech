@@ -9,3 +9,32 @@
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 {% bootstrap_messages %}
+
+
+<div class="modal fade" id="helpModal"  role="dialog" aria-labelledby="helpModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title">Не знаете с чего начать?</h3>
+            </div>
+            <div class="modal-body">
+                <ol class="text-left">
+                    <li>Оставьте заявку</li>
+                    <li>Проконсультируйтесь со специалистом</li>
+                    <li>Сравните условия и цены</li>
+                    <li>Закажите услугу</li>
+                </ol>
+            </div>
+            <div class="modal-footer m-footer">
+                <div class="border">
+                    <a href="{% url 'contacts' %}">
+                        <button type="button" class="btn yellow-btn">
+                            Оставить заявку
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

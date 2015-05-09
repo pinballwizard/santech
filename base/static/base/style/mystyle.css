@@ -78,6 +78,7 @@ a:active{
     font-size: 12px;
     outline: 0;
     border: none;
+    white-space: nowrap;
 }
 .border{
     display: inline-block;

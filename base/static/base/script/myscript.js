@@ -1,6 +1,7 @@
 $(document).ready(function() {
     $(function () {
         $('#myTab a:first').tab('show');
+        $('[data-toggle="popover"]').popover();
     });
     var nav = $("#myNavbar");
     nav.find("li").not(".dropdown").children("a").click(function(){
@@ -17,10 +18,13 @@ $(document).ready(function() {
     $('.modalButton').click(function(){
         $(this).siblings('.myModal').modal('show')
     });
-    $('.editable').click(function(){
-
+    $('.call-popover').popover({
+        animation: true,
+        placement: 'top',
+        trigger: 'focus manual',
+        container: 'body',
+        html: true
     });
-
     yandex_map();
 //    google_map();
 });
