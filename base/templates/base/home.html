@@ -6,11 +6,14 @@
 {% endblock meta %}
 {% block header %}
     <header class="big-header">
+        <div class="overlay"></div>
         <div class="container">
             <div class="row">
-                <div class="col-md-4 col-md-offset-2 text-center big-square">
+                <div class="col-md-4 col-md-offset-2 text-center">
                     <h1 class="firm-name">{{ office.name }}</h1>
                     Сантехмонтаж в Красноярске<br>
+                </div>
+                <div class="col-md-4 text-center">
                     <span class="phone">Офис: {{ office.phone1 }}<br>
                     Техник: {{ office.phone2 }}</span><br>
                     <div class="border">
@@ -24,26 +27,26 @@
     </header>
 {% endblock header %}
 {% block body %}
-    <div class="col-md-4">
+    <div class="col-md-4 text-center">
         <div class="panel-body dark msq">
-            <h3>Водоснабжение</h3>
-            {% lorem 1 %}
+            <h4>Установка водосчетчиков</h4>
+            <h1><small>от</small> 2000 р.</h1>
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 text-center">
         <div class="panel-body medium msq">
-            <h3>Канализация</h3>
-            {% lorem 1 %}
+            <h4>Замена стояков канализации</h4>
+            <h1><small>от</small> 3000 р.</h1>
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 text-center">
         <div class="panel-body light msq">
-            <h3>Отопление</h3>
-            {% lorem 2 %}
+            <h4>Установка акриловой ванны</h4>
+            <h1><small>от</small> 1500 р.</h1>
         </div>
     </div>
     <div class="row text-center">
-        <h2 class="page-header text-center">Виды работ</h2>
+        <h2 class="text-center">Виды работ</h2>
         {% for service in services %}
             <div class="col-md-4 omsq">
                 <img class="img-responsive" src="{{ service.image.url }}" height="auto" width="auto"/>

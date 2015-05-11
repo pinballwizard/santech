@@ -65,41 +65,6 @@
                 </div>
             </div>
             <div role="tabpanel" class="tab-pane" id="reviews">
-                <button class="btn btn-primary modalButton" data-toggle="modal" data-target=".reviewModal" type="button">Оценить</button>
-                <div class="modal fade reviewModal" tabindex="-1" role="dialog" aria-labelledby="reviewModalLabel" aria-hidden="true">
-                    <div class="modal-dialog text-center">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="reviewModalLabel">Оставить отзыв</h4>
-                            </div>
-                            <div class="modal-body">
-                                <form action="{% url 'reviews' %}" role="form" method="POST" id="reviewForm">
-                                    {% csrf_token %}
-                                    {{ reviewForm.non_field_errors }}
-                                    <div class="row">
-                                        <div class="col-xs-6">
-                                            <div class="form-group fieldWrapper">
-                                                {{ reviewForm.owner }}
-                                            </div>
-                                            <div class="form-group fieldWrapper">
-                                                {{ reviewForm.header }}
-                                            </div>
-                                            <div class="form-group fieldWrapper">
-                                                {{ reviewForm.grade }}
-                                                <span class="review-glyph glyphicon glyphicon-star"></span>
-                                                <span class="review-glyph glyphicon glyphicon-star"></span>
-                                                <span class="review-glyph glyphicon glyphicon-star"></span>
-                                                <span class="review-glyph glyphicon glyphicon-star"></span>
-                                                <span class="review-glyph glyphicon glyphicon-star"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="row">
                     <h3 class="text-center">Отзывы</h3>
                     {% for review in reviews %}

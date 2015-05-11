@@ -25,6 +25,13 @@ $(document).ready(function() {
         container: 'body',
         html: true
     });
+    //if (window.location.pathname != '/'){
+    //    var header = $(".sm-header");
+    //    header.animate({height: '100px'}, "slow");
+    //}
+    //$(".nav-pills li a").click(function(){
+    //
+    //});
     yandex_map();
 //    google_map();
 });
