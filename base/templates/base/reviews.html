@@ -5,74 +5,88 @@
     <meta name="Keywords" content="{% for review in reviews %}{{ review.name }},{% endfor %}">
 {% endblock meta %}
 {% block body %}
-    <div class="row">
-        <h3 class="text-center">Наши работы</h3>
-        <div class="row">
-            {% for project in projects %}
-                <a href="#" data-toggle="modal" data-target=".{{ project.pk }}Modal">
-                    <div class="col-md-3">
-                        <img src="{{ project.face_image.url }}" class="img-responsive">
-                        <div class="modal fade {{ project.pk }}Modal" tabindex="-1" role="dialog" aria-labelledby="projectModalLabel" aria-hidden="true">
-                            <div class="modal-dialog text-center modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="projectModalLabel">{{ project.name }}</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                                            <div class="carousel-inner" role="listbox">
-                                                {% for image in project.image %}
-                                                    <div class="item {{forloop.first|yesno:'active,'}}">
-                                                        <img class="img-responsive" src="{{image.image.url}}"/>
-                                                        <h2>{{ image.text }}</h2>
-                                                    </div>
-                                                {% endfor %}
+    <div role="tabpanel">
+        <!-- Навигационные вкладки -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#works" aria-controls="works" role="tab" data-toggle="tab">Работы</a></li>
+            <li role="presentation"><a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab">Отзывы</a></li>
+        </ul>
+        <!-- Вкладки панелей -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="works">
+                <div class="row">
+                    <h3 class="text-center">Наши работы</h3>
+                    <div class="row">
+                        {% for project in projects %}
+                        <a href="#" data-toggle="modal" data-target=".{{ project.pk }}Modal">
+                            <div class="col-md-3">
+                                <img src="{{ project.face_image.url }}" class="img-responsive">
+                                <div class="modal fade {{ project.pk }}Modal" tabindex="-1" role="dialog" aria-labelledby="projectModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog text-center modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="projectModalLabel">{{ project.name }}</h4>
                                             </div>
-                                            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                                                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                                                <span class="sr-only">Previous</span>
-                                            </a>
-                                            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                                                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                                                <span class="sr-only">Next</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <div class="carousel-indicators">
-                                            {% for image in project.image %}
-                                                <img src="{{ image.image.url }}" height="10%" width="10%" class="img-thumbnail" data-target="#myCarousel" data-slide-to="{{forloop.counter0}}" class={{forloop.first|yesno:"active,"}}>
-                                            {% endfor %}
+                                            <div class="modal-body">
+                                                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                                                    <div class="carousel-inner" role="listbox">
+                                                        {% for image in project.image %}
+                                                        <div class="item {{forloop.first|yesno:'active,'}}">
+                                                            <img class="img-responsive" src="{{image.image.url}}"/>
+                                                            <h2>{{ image.text }}</h2>
+                                                        </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                                                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                                        <span class="sr-only">Previous</span>
+                                                    </a>
+                                                    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                                                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                                        <span class="sr-only">Next</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <div class="carousel-indicators">
+                                                    {% for image in project.image %}
+                                                    <img src="{{ image.image.url }}" height="10%" width="10%" class="img-thumbnail" data-target="#myCarousel" data-slide-to="{{forloop.counter0}}" class={{forloop.first|yesno:"active,"}}>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </a>
-            {% endfor %}
-        </div>
-    </div>
-    <div class="row">
-        <h3 class="text-center">Отзывы</h3>
-        {% for review in reviews %}
-            <div class="col-md-4">
-                <div class="panel">
-                    <div class="panel-heading">
-                        <p class="panel-title">{{ review.header }}</p>
-                        <span class="review-glyph glyphicon glyphicon-star"></span>
-                        <span class="review-glyph glyphicon glyphicon-star"></span>
-                        <span class="review-glyph glyphicon glyphicon-star"></span>
-                        <span class="review-glyph glyphicon glyphicon-star"></span>
-                        <span class="review-glyph glyphicon glyphicon-star"></span>
-                    </div>
-                    <div class="panel-body">
-                        <p>{{ review.owner }}</p>
-                        <p class="text-justify">{{ review.text }} {% lorem 1 %}</p>
+                        </a>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
-        {% endfor %}
+            <div role="tabpanel" class="tab-pane" id="reviews">
+                <div class="row">
+                    <h3 class="text-center">Отзывы</h3>
+                    {% for review in reviews %}
+                    <div class="col-md-4">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <p class="panel-title">{{ review.header }}</p>
+                                <span class="review-glyph glyphicon glyphicon-star"></span>
+                                <span class="review-glyph glyphicon glyphicon-star"></span>
+                                <span class="review-glyph glyphicon glyphicon-star"></span>
+                                <span class="review-glyph glyphicon glyphicon-star"></span>
+                                <span class="review-glyph glyphicon glyphicon-star"></span>
+                            </div>
+                            <div class="panel-body">
+                                <p>{{ review.owner }}</p>
+                                <p class="text-justify">{{ review.text }} {% lorem 1 %}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock body %}
