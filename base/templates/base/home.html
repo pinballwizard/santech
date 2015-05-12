@@ -27,51 +27,58 @@
     </header>
 {% endblock header %}
 {% block body %}
-    <div class="col-md-4 text-center">
-        <div class="panel-body dark msq">
-            <h4>Установка водосчетчиков</h4>
-            <h1><small>от</small> 2000 р.</h1>
-        </div>
-    </div>
-    <div class="col-md-4 text-center">
-        <div class="panel-body medium msq">
-            <h4>Замена стояков канализации</h4>
-            <h1><small>от</small> 3000 р.</h1>
-        </div>
-    </div>
-    <div class="col-md-4 text-center">
-        <div class="panel-body light msq">
-            <h4>Установка акриловой ванны</h4>
-            <h1><small>от</small> 1500 р.</h1>
-        </div>
-    </div>
-    <div class="row text-center">
-        <h2 class="text-center">Виды работ</h2>
-        {% for service in services %}
-            <div class="col-md-4 omsq">
-                <img class="img-responsive" src="{{ service.image.url }}" height="auto" width="auto"/>
-            </div>
-            <a href="{% url 'services_article' service.pk %}">
-                <div class="col-md-4 omsq">
-                    <h3>{{ service.header }}</h3>
-                    <p class="text-justify">{{ service.text|truncatewords:20 }}</p>
+    <div class="row">
+        <h2 class="text-center">Акции</h2>
+        {% for item in prices %}
+            <div class="col-md-4 text-center">
+                <div class="panel-body {% cycle 'dark' 'medium' 'light' %} msq">
+                    <h4>{{ item.name }}</h4>
+                    <h1><small>от</small> {{ item.price }} р.</h1>
                 </div>
-            </a>
+            </div>
         {% endfor %}
     </div>
-    <h2 class="text-center">Новости</h2>
-    {% for blog in blogs %}
-        <div class="panel">
-            <div class="panel-heading">
-                <p class="panel-title">{{ blog.name }}</p>
-                <p class="text-right">{{ blog.pub_date }}</p>
+    <div class="row">
+        <h2 class="text-center">Виды работ</h2>
+        {% for service in services %}
+            {% if forloop.counter0 == 1 %}
+                <div class="col-xs-4 omsq2">
+                    <a href="{% url 'services_article' service.pk %}">
+                        <div class="omsqt2">
+                            <h3 class="text-center">{{ service.header }}</h3>
+                            <p class="text-justify">{{ service.text|safe|truncatewords:20 }}</p>
+                        </div>
+                    </a>
+                    <img class="" src="{{ service.image.url }}" width="100%" height="200px"/>
+                </div>
+            {% else %}
+                <div class="col-xs-4 omsq">
+                    <img class="" src="{{ service.image.url }}" width="100%" height="200px"/>
+                    <a href="{% url 'services_article' service.pk %}">
+                        <div class="omsqt">
+                            <h3 class="text-center">{{ service.header }}</h3>
+                            <p class="text-justify">{{ service.text|safe|truncatewords:20 }}</p>
+                        </div>
+                    </a>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div class="row">
+        <h2 class="text-center">Новости</h2>
+        {% for blog in blogs %}
+            <div class="panel">
+                <div class="panel-heading">
+                    <p class="panel-title">{{ blog.name }}</p>
+                    <p class="text-right">{{ blog.pub_date }}</p>
+                </div>
+                <div class="panel-body">
+                    {{ blog.text|safe|truncatewords_html:100 }}
+                    <a href="{% url 'blog_article' blog.pk %}">
+                        <button class="btn btn-primary pull-right" type="button">Читать далее</button>
+                    </a>
+                </div>
             </div>
-            <div class="panel-body">
-                {{ blog.text|safe|truncatewords_html:100 }}
-                <a href="{% url 'blog_article' blog.pk %}">
-                    <button class="btn btn-primary pull-right" type="button">Читать далее</button>
-                </a>
-            </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
+    </div>
 {% endblock body %}

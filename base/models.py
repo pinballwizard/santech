@@ -17,7 +17,7 @@ class Worker(models.Model):
 
 
 class Blog(models.Model):
-    name = models.CharField("Название", max_length=20, unique=True)
+    name = models.CharField("Название", max_length=50, unique=True)
     pub_date = models.DateField("Время публикации")
     text = models.TextField("Текст", max_length=20000)
 
@@ -122,6 +122,7 @@ class SocialWidget(models.Model):
 class Price(models.Model):
     name = models.CharField("Название", max_length=30)
     price = models.IntegerField("Цена")
+    sale = models.BooleanField("Акция", help_text="Указать отображение на главной странице")
 
     def __str__(self):
         return self.name

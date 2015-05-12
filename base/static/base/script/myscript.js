@@ -21,7 +21,7 @@ $(document).ready(function() {
     $('.call-popover').popover({
         animation: true,
         placement: 'top',
-        trigger: 'focus manual',
+        trigger: 'focus',
         container: 'body',
         html: true
     });

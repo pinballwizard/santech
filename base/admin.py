@@ -17,8 +17,8 @@ class FeatureAdmin(admin.ModelAdmin):
     list_display = ('owner', 'header', 'text', 'grade')
 
 @admin.register(Service)
-class ServiceAdmin(admin.ModelAdmin):
-    list_display = ('header', 'text')
+class ServiceAdmin(SummernoteModelAdmin):
+    list_display = ('header', 'image')
 
 # @admin.register(Partner)
 # class PartnerAdmin(admin.ModelAdmin):
@@ -47,7 +47,7 @@ class SocialWidgetAdmin(admin.ModelAdmin):
 
 @admin.register(Price)
 class PriceAdmin(admin.ModelAdmin):
-    list_display = ('name', 'price')
+    list_display = ('name', 'price', 'sale')
 
 @admin.register(Mail)
 class MailAdmin(admin.ModelAdmin):

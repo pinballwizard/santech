@@ -14,11 +14,19 @@
                 <h2 class="panel-title text-center">{{ service.header }}</h2>
             </div>
             <div class="panel-body">
-                <img class="img-responsive" src="{{ service.image.url }}" height="auto" width="auto"/>
-                <p class="text-justify">{{ service.text|truncatewords:50 }}</p>
-                <a href="{% url 'services_article' service.pk %}">
-                    <button class="btn btn-primary pull-right" type="button">Читать далее</button>
-                </a>
+                <div class="media">
+                    <div class="media-left media-middle">
+                        <img class="media-object" src="{{ service.image.url }}" height="auto" width="200px"/>
+                    </div>
+                    <div class="media-body">
+                        <p class="text-justify">{{ service.text|safe|truncatewords:200 }}</p>
+                    </div>
+                    <div class="media-bottom">
+                        <a href="{% url 'services_article' service.pk %}">
+                            <button class="btn btn-primary pull-right" type="button">Читать далее</button>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     {%  endfor %}

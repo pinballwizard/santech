@@ -18,24 +18,25 @@
                     <h3 class="text-center">Наши работы</h3>
                     <div class="row">
                         {% for project in projects %}
-                        <a href="#" data-toggle="modal" data-target=".{{ project.pk }}Modal">
                             <div class="col-md-3">
-                                <img src="{{ project.face_image.url }}" class="img-responsive">
+                                <a href="#" data-toggle="modal" data-target=".{{ project.pk }}Modal">
+                                    <img src="{{ project.face_image.url }}" class="img-responsive">
+                                </a>
                                 <div class="modal fade {{ project.pk }}Modal" tabindex="-1" role="dialog" aria-labelledby="projectModalLabel" aria-hidden="true">
                                     <div class="modal-dialog text-center modal-lg">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                <h4 class="modal-title" id="projectModalLabel">{{ project.name }}</h4>
+                                                <h2 class="modal-title" id="projectModalLabel">{{ project.name }}</h2>
                                             </div>
                                             <div class="modal-body">
                                                 <div id="myCarousel" class="carousel slide" data-ride="carousel">
                                                     <div class="carousel-inner" role="listbox">
                                                         {% for image in project.image %}
-                                                        <div class="item {{forloop.first|yesno:'active,'}}">
-                                                            <img class="img-responsive" src="{{image.image.url}}"/>
-                                                            <h2>{{ image.text }}</h2>
-                                                        </div>
+                                                            <div class="item {{forloop.first|yesno:'active,'}}">
+                                                                <img class="img-responsive" src="{{image.image.url}}"/>
+                                                                <h3>{{ image.text }}</h3>
+                                                            </div>
                                                         {% endfor %}
                                                     </div>
                                                     <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
@@ -51,7 +52,7 @@
                                             <div class="modal-footer">
                                                 <div class="carousel-indicators">
                                                     {% for image in project.image %}
-                                                    <img src="{{ image.image.url }}" height="10%" width="10%" class="img-thumbnail" data-target="#myCarousel" data-slide-to="{{forloop.counter0}}" class={{forloop.first|yesno:"active,"}}>
+                                                        <img src="{{ image.image.url }}" height="15%" width="15%" class="img-rounded" data-target="#myCarousel" data-slide-to="{{forloop.counter0}}" class={{forloop.first|yesno:"active,"}}>
                                                     {% endfor %}
                                                 </div>
                                             </div>
@@ -59,7 +60,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </a>
                         {% endfor %}
                     </div>
                 </div>

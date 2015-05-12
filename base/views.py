@@ -4,6 +4,23 @@ from base.models import *
 from django.core import mail
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+popover_text = '''<div class="modal-body">
+                        <ol class="text-left">
+                            <li>Оставьте заявку</li>
+                            <li>Проконсультируйтесь со специалистом</li>
+                            <li>Сравните условия и цены</li>
+                            <li>Закажите услугу</li>
+                        </ol>
+                    </div>
+                    <div class="modal-footer m-footer">
+                        <div class="border">
+                            <a href="{% url 'contacts' %}">
+                                <button type="button" class="btn yellow-btn">Оставить заявку</button>
+                            </a>
+                        </div>
+                    </div>'''
+
+
 class MailForm(forms.ModelForm):
     class Meta:
         model = Mail
@@ -68,17 +85,20 @@ class ReviewForm(forms.ModelForm):
 def home(request):
     data = {
         # 'carousel_images': CarouselImage.objects.all(),
+        'prices': Price.objects.filter(sale=True).order_by('?')[:3],
         'widgets': SocialWidget.objects.all(),
         'office': Office.objects.get(pk=1),
         'blogs': Blog.objects.order_by('-pub_date')[:3],
-        'services': Service.objects.order_by('?')[:3]
+        'services': Service.objects.order_by('?')[:3],
+        'reviewForm': ReviewForm(),
+        'ptext': popover_text,
     }
     return render(request, 'base/home.html', data)
 
 
 def blog(request):
     blog_list = Blog.objects.order_by('-pub_date')
-    paginator = Paginator(blog_list, 1)
+    paginator = Paginator(blog_list, 10)
 
     if request.GET.get('blog'):
         blog_article = request.GET.get('blog')
@@ -105,6 +125,8 @@ def blog(request):
         'blogs': blogs,
         'widgets': SocialWidget.objects.all(),
         'office': Office.objects.get(pk=1),
+        'reviewForm': ReviewForm(),
+        'ptext': popover_text,
     }
     return render(request, 'base/blog.html', data)
 
@@ -114,6 +136,8 @@ def blog_article(request, article):
         'blog': Blog.objects.get(pk=article),
         'widgets': SocialWidget.objects.all(),
         'office': Office.objects.get(pk=1),
+        'reviewForm': ReviewForm(),
+        'ptext': popover_text,
     }
     return render(request, 'base/blog_article.html', data)
 
@@ -136,6 +160,8 @@ def contacts(request):
         'office': office,
         'widgets': SocialWidget.objects.all(),
         'form': MailForm(),
+        'reviewForm': ReviewForm(),
+        'ptext': popover_text,
         'thank': False,
     }
     if request.method == 'POST':
@@ -160,26 +186,13 @@ def pricing(request):
         'prices': Price.objects.all(),
         'widgets': SocialWidget.objects.all(),
         'office': Office.objects.get(pk=1),
+        'reviewForm': ReviewForm(),
+        'ptext': popover_text,
     }
     return render(request, 'base/pricing.html', data)
 
 
 def reviews(request):
-    popover_text = '''<div class="modal-body">
-                            <ol class="text-left">
-                                <li>Оставьте заявку</li>
-                                <li>Проконсультируйтесь со специалистом</li>
-                                <li>Сравните условия и цены</li>
-                                <li>Закажите услугу</li>
-                            </ol>
-                        </div>
-                        <div class="modal-footer m-footer">
-                            <div class="border">
-                                <a href="{% url 'contacts' %}">
-                                    <button type="button" class="btn yellow-btn">Оставить заявку</button>
-                                </a>
-                            </div>
-                        </div>'''
     p = []
     projects = Project.objects.all()
     for project1 in projects:
@@ -189,8 +202,8 @@ def reviews(request):
         'widgets': SocialWidget.objects.all(),
         'office': Office.objects.get(pk=1),
         'reviewForm': ReviewForm(),
-        'projects': projects,
         'ptext': popover_text,
+        'projects': projects,
         # 'projects_images': ProjectImage.objects.select_related().all(),
         'thanks': False,
     }
@@ -209,6 +222,8 @@ def services(request):
         'services': Service.objects.all(),
         'widgets': SocialWidget.objects.all(),
         'office': Office.objects.get(pk=1),
+        'reviewForm': ReviewForm(),
+        'ptext': popover_text,
     }
     return render(request, 'base/services.html', data)
 
@@ -217,6 +232,8 @@ def services_article(request, article):
         'service': Service.objects.get(pk=article),
         'widgets': SocialWidget.objects.all(),
         'office': Office.objects.get(pk=1),
+        'reviewForm': ReviewForm(),
+        'ptext': popover_text,
     }
     return render(request, 'base/services_article.html', data)
 
@@ -226,5 +243,7 @@ def workers(request):
         'workers': Worker.objects.all(),
         'widgets': SocialWidget.objects.all(),
         'office': Office.objects.get(pk=1),
+        'reviewForm': ReviewForm(),
+        'ptext': popover_text,
     }
     return render(request, 'base/workers.html', data)

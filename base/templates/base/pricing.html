@@ -5,4 +5,43 @@
     <meta name="Keywords" content="{% for item in prices %}{{ item.name }},{% endfor %}">
 {% endblock meta %}
 {% block body %}
+    <div class="row">
+        <div class="col-md-3">
+            <div class="page-header text-center">
+                <h3>Цены<br>
+                    <small>В данном разделе представлены актуальные предложения компании</small>
+                </h3>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading"><b>Цены</b></div>
+                <table class="table">
+                    <tr>
+                        <th>Название</th>
+                        <th>Цена в рублях</th>
+                    </tr>
+                    {% for item in prices %}
+                        <tr>
+                            <td>
+                                {{ item.name }}
+                                {% if item.sale == True %}
+                                    АКЦЫЯ!!!
+                                {% endif %}
+                            </td>
+                            <td>{{ item.price }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="alert alert-info text-center">
+                Еще больше информации о скидках и
+                акциях нашей компании Вы можете узнать, позвонив по телефону<br>
+                {{ office.phone1 }}
+                или связавшись с нами через <b><a href="{% url 'contacts' %}">сайт</a></b>
+            </div>
+        </div>
+    </div>
 {% endblock body %}
