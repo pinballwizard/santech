@@ -36,6 +36,9 @@ header{
 .big-header{
     height: 200px;
 }
+header > .container{
+    padding-top: 20px;
+}
 nav{
     margin: 15px 0;
     font-size: 14px;
@@ -190,11 +193,42 @@ h1 small{
 .carousel-control.right{
     background: none;
 }
-.readmore-btn{
+.readmore-btn,
+.contact-btn{
+    color: #3c3c3c;
     background: rgb(240,200,0);
     box-shadow: 1px 1px 4px 0 #5e5e5e;
+    border: none;
+}
+.pagination > .active > a,
+.pagination > .active > a:active,
+.pagination > .active > a:hover,
+.pagination > .active > a:focus{
+    background: rgb(240,160,0);
+    color: #3c3c3c;
+    border: none;
+    cursor: pointer;
 }
 img{
     display: inline;
     vertical-align: middle;
+}
+.alert-info {
+    color: #3c3c3c;
+    background-color: rgba(240,200,0,0.8);
+    border-color: rgb(240,200,0);
+}
+.alert > b > a{
+    color: rgb(240,100,0);
+}
+.glyphicon{
+    color: rgb(240,100,0);
+}
+
+.panel-price > .panel-heading{
+    background-color: rgba(240,200,0,0.8);
+    border-color: rgb(240,200,0);
+}
+.panel-price > table{
+    border-color: rgb(240,200,0);
 }
