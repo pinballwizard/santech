@@ -9,7 +9,11 @@
         <div class="overlay"></div>
         <div class="container">
             <div class="row">
-                <div class="col-md-4 col-md-offset-2 text-center">
+                <div class="col-md-2">
+                    <img src="{% static 'base/images/bath.png' %}" height="80px" width="auto">
+                    <img src="{% static 'base/images/sink.png' %}" height="80px" width="auto">
+                </div>
+                <div class="col-md-4 text-center">
                     <h1 class="firm-name">{{ office.name }}</h1>
                     Сантехмонтаж в Красноярске<br>
                 </div>
@@ -21,6 +25,10 @@
                             <button class="btn yellow-btn" type="button">Оставить заявку</button>
                         </a>
                     </div>
+                </div>
+                <div class="col-md-2">
+                    <img src="{% static 'base/images/cyberscooty-shower-1.png' %}" height="80px" width="auto">
+                    <img src="{% static 'base/images/Household-Toilet-Pan-icon.png' %}" height="80px" width="auto">
                 </div>
             </div>
         </div>
@@ -75,7 +83,7 @@
                 <div class="panel-body">
                     {{ blog.text|safe|truncatewords_html:100 }}
                     <a href="{% url 'blog_article' blog.pk %}">
-                        <button class="btn btn-primary pull-right" type="button">Читать далее</button>
+                        <button class="btn readmore-btn pull-right" type="button">Читать далее</button>
                     </a>
                 </div>
             </div>

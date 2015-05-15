@@ -22,17 +22,17 @@
             <div class="overlay"></div>
             <div class="container">
                 <div class="row text-center text-nowrap">
-                    <div class="col-md-3 col-md-offset-2 big-square firm-name">
+                    <div class="col-xs-3 col-xs-offset-2 big-square firm-name">
                         {{ office.name }}
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-xs-2">
                         <div class="border">
                             <a href="{% url 'contacts' %}">
                                 <button class="btn yellow-btn" type="button">Оставить заявку</button>
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-3 big-square phone">
+                    <div class="col-xs-3 big-square phone">
                         {{ office.phone1 }} <br>
                         {{ office.phone2 }}
                     </div>
