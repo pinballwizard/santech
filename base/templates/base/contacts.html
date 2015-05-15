@@ -12,13 +12,6 @@
             </small>
         </h3>
     </div>
-    <div id="map" data-maptype="{{ office.maptype }}" data-latitude="{{ office.latitude }}" data-longitude="{{ office.longitude }}" style="width:100%; height:400px"></div>
-    <address class="text-center">
-        Адрес: {{ office.address }}<br/>
-        Офис: {{ office.phone1 }}<br/>
-        Техник: {{ office.phone2 }}<br/>
-        Email: {{ office.email|urlize }}
-    </address>
     <form action="{% url 'contacts' %}" role="form" method="post">
         <h4 class="text-center">Написать нам <span class="glyphicon glyphicon-pencil"></span></h4>
         {% csrf_token %}
@@ -48,11 +41,20 @@
             </button>
         </div>
     </form>
+    <br>
     <div class="row">
         {% if thank %}
-            <div class="col-md-6 col-md-offset-3">
-                <div class="alert alert-success">Спасибо за обратную связь!</div>
-            </div>
+        <div class="col-md-6 col-md-offset-3">
+            <div class="alert alert-success">Спасибо за обратную связь!</div>
+        </div>
         {% endif %}
     </div>
+    <div id="map" data-maptype="{{ office.maptype }}" data-latitude="{{ office.latitude }}" data-longitude="{{ office.longitude }}" style="width:100%; height:400px"></div>
+    <address class="text-center">
+        <br>
+        Адрес: {{ office.address }}<br/>
+        Офис: {{ office.phone1 }}<br/>
+        Техник: {{ office.phone2 }}<br/>
+        Email: {{ office.email|urlize }}
+    </address>
 {% endblock body %}
