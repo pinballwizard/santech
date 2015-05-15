@@ -169,3 +169,14 @@ h1 small{
 .float-btn:focus{
     outline: none;
 }
+.our-works-indicators{
+    /*margin-top: 100px;*/
+    position: relative;
+}
+.our-works-image:hover{
+    cursor: pointer;
+}
+.carousel-control.left,
+.carousel-control.right{
+    background: none;
+}

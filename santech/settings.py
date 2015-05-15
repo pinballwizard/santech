@@ -89,8 +89,12 @@ WSGI_APPLICATION = 'santech.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'HOST': '52.28.14.84',
+        'PORT': '5432',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': '14875264',
     }
 }
 
@@ -133,8 +137,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'smtp.yandex.com'
 EMAIL_PORT = 465
-# EMAIL_HOST_USER = 'ooo.service-partner@yandex.ru'
-# EMAIL_HOST_PASSWORD = 'xVSTuUEWWk'
-# EMAIL_HOST_PASSWORD = 'xVSTuUEWWk'
+EMAIL_HOST_USER = 'santech-montage@yandex.ru'
+EMAIL_HOST_PASSWORD = 'SMGLTM5B'
 EMAIL_USE_TLS = True
 # EMAIL_USE_SSL = True

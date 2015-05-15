@@ -1,4 +1,4 @@
-from django.shortcuts import render, render_to_response, redirect
+from django.shortcuts import render, render_to_response, redirect, get_object_or_404
 from django import forms
 from base.models import *
 from django.core import mail
@@ -81,18 +81,21 @@ class ReviewForm(forms.ModelForm):
             }),
         }
 
+template_dict = {
+    'widgets': SocialWidget.objects.all(),
+    'office': Office.objects.get(pk=1),
+    'reviewForm': ReviewForm(),
+    'ptext': popover_text,
+    'review_thank': False,
+}
 
 def home(request):
     data = {
-        # 'carousel_images': CarouselImage.objects.all(),
         'prices': Price.objects.filter(sale=True).order_by('?')[:3],
-        'widgets': SocialWidget.objects.all(),
-        'office': Office.objects.get(pk=1),
         'blogs': Blog.objects.order_by('-pub_date')[:3],
         'services': Service.objects.order_by('?')[:3],
-        'reviewForm': ReviewForm(),
-        'ptext': popover_text,
     }
+    data.update(template_dict)
     return render(request, 'base/home.html', data)
 
 
@@ -120,36 +123,19 @@ def blog(request):
             blogs = paginator.page(1)
         except EmptyPage:
             blogs = paginator.page(paginator.num_pages)
-
     data = {
         'blogs': blogs,
-        'widgets': SocialWidget.objects.all(),
-        'office': Office.objects.get(pk=1),
-        'reviewForm': ReviewForm(),
-        'ptext': popover_text,
     }
+    data.update(template_dict)
     return render(request, 'base/blog.html', data)
 
 
 def blog_article(request, article):
     data = {
         'blog': Blog.objects.get(pk=article),
-        'widgets': SocialWidget.objects.all(),
-        'office': Office.objects.get(pk=1),
-        'reviewForm': ReviewForm(),
-        'ptext': popover_text,
     }
+    data.update(template_dict)
     return render(request, 'base/blog_article.html', data)
-
-
-# def company(request):
-#     data = {
-#         'partners': Partner.objects.all(),
-#         'widgets': SocialWidget.objects.all(),
-#         'office': Office.objects.get(pk=1),
-#         # 'about_company': Blog.objects.get(name="about_company"),
-#     }
-#     return render(request, 'base/company.html', data)
 
 
 def contacts(request):
@@ -157,13 +143,10 @@ def contacts(request):
     office_mail = office.email
     server_mail = 'ooo.service-partner@yandex.ru'
     data = {
-        'office': office,
-        'widgets': SocialWidget.objects.all(),
         'form': MailForm(),
-        'reviewForm': ReviewForm(),
-        'ptext': popover_text,
-        'thank': False,
+
     }
+    data.update(template_dict)
     if request.method == 'POST':
         form = MailForm(request.POST)
         if form.is_valid():
@@ -189,6 +172,7 @@ def pricing(request):
         'reviewForm': ReviewForm(),
         'ptext': popover_text,
     }
+    data.update(template_dict)
     return render(request, 'base/pricing.html', data)
 
 
@@ -199,14 +183,10 @@ def reviews(request):
         project1.image = ProjectImage.objects.all().filter(project__name=project1.name)
     data = {
         'reviews': Review.objects.all(),
-        'widgets': SocialWidget.objects.all(),
-        'office': Office.objects.get(pk=1),
-        'reviewForm': ReviewForm(),
-        'ptext': popover_text,
         'projects': projects,
         # 'projects_images': ProjectImage.objects.select_related().all(),
-        'thanks': False,
     }
+    data.update(template_dict)
     if request.method == 'POST':
         form = ReviewForm(request.POST)
         if form.is_valid():
@@ -220,30 +200,22 @@ def reviews(request):
 def services(request):
     data = {
         'services': Service.objects.all(),
-        'widgets': SocialWidget.objects.all(),
-        'office': Office.objects.get(pk=1),
-        'reviewForm': ReviewForm(),
-        'ptext': popover_text,
     }
+    data.update(template_dict)
     return render(request, 'base/services.html', data)
+
 
 def services_article(request, article):
     data = {
         'service': Service.objects.get(pk=article),
-        'widgets': SocialWidget.objects.all(),
-        'office': Office.objects.get(pk=1),
-        'reviewForm': ReviewForm(),
-        'ptext': popover_text,
     }
+    data.update(template_dict)
     return render(request, 'base/services_article.html', data)
 
 
 def workers(request):
     data = {
         'workers': Worker.objects.all(),
-        'widgets': SocialWidget.objects.all(),
-        'office': Office.objects.get(pk=1),
-        'reviewForm': ReviewForm(),
-        'ptext': popover_text,
     }
+    data.update(template_dict)
     return render(request, 'base/workers.html', data)
