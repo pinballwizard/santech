@@ -18,8 +18,11 @@
                 <div class="row">
                     {% for project in projects %}
                         <div class="col-md-3">
-                            <div class="our-works-image" data-toggle="modal" data-target=".{{ project.pk }}Modal">
+                            <div class="thumbnail our-works-image" data-toggle="modal" data-target=".{{ project.pk }}Modal">
                                 <img src="{{ project.face_image.url }}" class="img-responsive">
+                                <div class="caption">
+                                    <p class="text-center">{{ project.name }}</p>
+                                </div>
                             </div>
                             <div class="modal fade {{ project.pk }}Modal" tabindex="-1" role="dialog" aria-labelledby="projectModalLabel" aria-hidden="true">
                                 <div class="modal-dialog text-center modal-lg">

@@ -14,7 +14,7 @@ popover_text = '''<div class="modal-body">
                     </div>
                     <div class="modal-footer m-footer">
                         <div class="border">
-                            <a href="{% url 'contacts' %}">
+                            <a href="contacts">
                                 <button type="button" class="btn yellow-btn">Оставить заявку</button>
                             </a>
                         </div>

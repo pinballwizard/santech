@@ -1,28 +1,29 @@
 from django.contrib import admin
 from base.models import *
 
-from django_summernote.admin import SummernoteModelAdmin
+# from django_summernote.admin import SummernoteModelAdmin
 
-@admin.register(ProjectImage)
-class ProjectImageAdmin(admin.ModelAdmin):
+class ProjectImageAdmin(admin.StackedInline):
     model = ProjectImage
-    list_display = ('project', 'header', 'text', 'image')
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
     list_display = ('name',)
+    inlines = [
+        ProjectImageAdmin,
+    ]
 
 @admin.register(Review)
 class FeatureAdmin(admin.ModelAdmin):
     list_display = ('owner', 'header', 'text', 'grade')
 
 @admin.register(Service)
-class ServiceAdmin(SummernoteModelAdmin):
+class ServiceAdmin(admin.ModelAdmin):
     list_display = ('header', 'image')
 
-# @admin.register(Partner)
-# class PartnerAdmin(admin.ModelAdmin):
-#     list_display = ('name', 'logo')
+@admin.register(Partner)
+class PartnerAdmin(admin.ModelAdmin):
+    list_display = ('name', 'logo')
 
 @admin.register(Worker)
 class WorkerAdmin(admin.ModelAdmin):
@@ -38,7 +39,7 @@ class OfficeAdmin(admin.ModelAdmin):
         obj.save()
 
 @admin.register(Blog)
-class BlogAdmin(SummernoteModelAdmin):
+class BlogAdmin(admin.ModelAdmin):
     list_display = ('name', 'pub_date')
 
 @admin.register(SocialWidget)

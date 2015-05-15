@@ -30,6 +30,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = (
     'django_admin_bootstrapped',
+    # 'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,8 +40,8 @@ INSTALLED_APPS = (
     'django.contrib.sitemaps',
     # 'django.contrib.sites',
     'base',
-    'django_summernote',
-
+    # 'django_summernote',
+    'ckeditor',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -83,6 +84,9 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'santech.wsgi.application'
+
+CKEDITOR_UPLOAD_PATH = "ckeditor/"
+CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases

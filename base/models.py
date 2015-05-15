@@ -2,7 +2,7 @@ import urllib.request
 from django.utils.encoding import iri_to_uri
 import json
 from django.db import models
-
+from ckeditor.fields import RichTextField
 
 class Worker(models.Model):
     name = models.CharField("Имя", max_length=30)
@@ -12,6 +12,10 @@ class Worker(models.Model):
     photo = models.ImageField("Фотография", upload_to='worker')
     phone = models.CharField("Телефон", max_length=100)
 
+    class Meta():
+        verbose_name = "Работник"
+        verbose_name_plural = "Работники"
+
     def __str__(self):
         return " ".join((self.name, self.last_name))
 
@@ -19,7 +23,11 @@ class Worker(models.Model):
 class Blog(models.Model):
     name = models.CharField("Название", max_length=50, unique=True)
     pub_date = models.DateField("Время публикации")
-    text = models.TextField("Текст", max_length=20000)
+    text = RichTextField("Текст", max_length=20000)
+
+    class Meta():
+        verbose_name = "Новость"
+        verbose_name_plural = "Новости"
 
     def __str__(self):
         return self.name
@@ -38,35 +46,54 @@ class Review(models.Model):
     text = models.CharField("Отзыв", max_length=500)
     grade = models.IntegerField("Оценка", choices=GRADE_CHOICES, default=5)
 
+    class Meta():
+        verbose_name = "Отзыв"
+        verbose_name_plural = "Отзывы"
+
 
 class Project(models.Model):
     name = models.CharField("Название проекта", max_length=100)
-    face_image = models.ImageField("Заставка")
+    face_image = models.ImageField("Заставка", upload_to='project')
+
+    class Meta():
+        verbose_name = "Проект"
+        verbose_name_plural = "Проекты"
 
 
 class ProjectImage(models.Model):
     project = models.ForeignKey(Project)
     image = models.ImageField("Картинка", upload_to='project')
-    header = models.CharField("Заголовок", max_length=100, blank=True)
     text = models.CharField("Комментарий", max_length=500, blank=True)
+
+    class Meta():
+        verbose_name = "Фотография проекта"
+        verbose_name_plural = "Фотографии проекта"
 
 
 class Service(models.Model):
     image = models.ImageField("Изображение", upload_to='service')
     header = models.CharField("Заголовок", max_length=20, unique=True)
-    text = models.TextField("Описание", blank=True)
+    text = RichTextField("Описание", blank=True)
+
+    class Meta():
+        verbose_name = "Услуга"
+        verbose_name_plural = "Услуги"
 
     def __str__(self):
         return self.header
 
 
-# class Partner(models.Model):
-#     name = models.CharField("Название", max_length=20, unique=True)
-#     logo = models.ImageField("Логотип", upload_to='partner')
-#     url = models.URLField("Ссылка на сайт")
-#
-#     def __str__(self):
-#         return self.name
+class Partner(models.Model):
+    name = models.CharField("Название", max_length=20, unique=True)
+    logo = models.ImageField("Логотип", upload_to='partner')
+    url = models.URLField("Ссылка на сайт")
+
+    class Meta():
+        verbose_name = "Партнер"
+        verbose_name_plural = "Партнера"
+
+    def __str__(self):
+        return self.name
 
 
 class Office(models.Model):
@@ -86,6 +113,10 @@ class Office(models.Model):
     latitude = models.CharField("Широта", max_length=10)
     longitude = models.CharField("Долгота", max_length=10)
     maptype = models.CharField("Тип карты", max_length=30, choices=MAP_CHOICES, default='yandex#map')
+
+    class Meta():
+        verbose_name = "Офисы"
+        verbose_name_plural = "Офис"
 
     def coordinate(self):
         return [self.longitude, self.latitude]
@@ -115,6 +146,10 @@ class SocialWidget(models.Model):
     name = models.CharField("Название", max_length=2, choices=SOCIAL_CHOICES)
     url = models.URLField("Ссылка", blank=True)
 
+    class Meta():
+        verbose_name = "Социальный виджет"
+        verbose_name_plural = "Социальные виджеты"
+
     def __str__(self):
         return self.name
 
@@ -123,6 +158,10 @@ class Price(models.Model):
     name = models.CharField("Название", max_length=30)
     price = models.IntegerField("Цена")
     sale = models.BooleanField("Акция", help_text="Указать отображение на главной странице")
+
+    class Meta():
+        verbose_name = "Цена"
+        verbose_name_plural = "Цены"
 
     def __str__(self):
         return self.name
@@ -133,6 +172,10 @@ class Mail(models.Model):
     email = models.EmailField("Email", max_length=30)
     subject = models.CharField("Тема", max_length=50)
     message = models.TextField("Сообщение", max_length=500)
+
+    class Meta():
+        verbose_name = "Письмо"
+        verbose_name_plural = "Письма"
 
     def __str__(self):
         return " ".join((self.sender, self.subject))

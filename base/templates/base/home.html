@@ -69,8 +69,8 @@
         {% for blog in blogs %}
             <div class="panel">
                 <div class="panel-heading">
-                    <p class="panel-title">{{ blog.name }}</p>
-                    <p class="text-right">{{ blog.pub_date }}</p>
+                    <span class="panel-title">{{ blog.name }}</span>
+                    <span class="pull-right text-right">{{ blog.pub_date }}</span>
                 </div>
                 <div class="panel-body">
                     {{ blog.text|safe|truncatewords_html:100 }}
