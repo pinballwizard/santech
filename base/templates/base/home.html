@@ -9,15 +9,19 @@
         <div class="overlay"></div>
         <div class="container">
             <div class="row text-center text-nowrap">
-                <div class="col-md-4 col-md-offset-2">
+                <div class="col-md-4 col-md-offset-2 col-sm-6">
                     <h1 class="firm-name" id="big-name">{{ office.name }}</h1>
                     Сантехмонтаж в Красноярске<br>
                 </div>
-                <div class="col-md-4 col-xs-6">
-                    <span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span><br><br>
-                    <span class="phone">Офис: {{ office.phone1 }}<br>
-                    Техник: {{ office.phone2 }}</span><br><br>
-                    <div class="border">
+                <div class="col-md-4 col-sm-6">
+                    <p class="phone">
+                        <span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span>
+                        Офис: {{ office.phone1 }}
+                        <br>
+                        <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+                        Техник: {{ office.phone2 }}
+                    </p>
+                    <div class="border hidden-xs">
                         <a href="{% url 'contacts' %}">
                             <button class="btn yellow-btn" type="button">Оставить заявку</button>
                         </a>
@@ -32,7 +36,7 @@
         <h2 class="text-center">Акции</h2>
         {% for item in prices %}
             <a href="{% url 'pricing' %}">
-                <div class="col-md-4 text-center">
+                <div class="col-sm-4 text-center">
                     <div class="panel-body {% cycle 'dark' 'medium' 'light' %} msq">
                         <h4>{{ item.name }}</h4>
                         <h1><small>от</small> {{ item.price }}<span class="glyphicon glyphicon-ruble" aria-hidden="true"></span></h1>
