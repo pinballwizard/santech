@@ -1,8 +1,8 @@
 {% extends "base/template.html" %}
 {% load staticfiles %}
 {% block meta %}
-    <meta name="Description" content="Главная страница компании {{ office.name }}">
-    <meta name="Keywords" content="сантехмонтаж">
+    <meta name="Description" content="{{ office.description }}">
+    <meta name="Keywords" content="{{ office.keywords }}">
 {% endblock meta %}
 {% block header %}
     <header class="big-header">
@@ -38,12 +38,14 @@
     <div class="row">
         <h2 class="text-center">Акции</h2>
         {% for item in prices %}
-            <div class="col-md-4 text-center">
-                <div class="panel-body {% cycle 'dark' 'medium' 'light' %} msq">
-                    <h4>{{ item.name }}</h4>
-                    <h1><small>от</small> {{ item.price }} р.</h1>
+            <a href="{% url 'pricing' %}">
+                <div class="col-md-4 text-center">
+                    <div class="panel-body {% cycle 'dark' 'medium' 'light' %} msq">
+                        <h4>{{ item.name }}</h4>
+                        <h1><small>от</small> {{ item.price }} р.</h1>
+                    </div>
                 </div>
-            </div>
+            </a>
         {% endfor %}
     </div>
     <div class="row">

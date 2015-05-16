@@ -90,7 +90,7 @@ class Partner(models.Model):
 
     class Meta():
         verbose_name = "Партнер"
-        verbose_name_plural = "Партнера"
+        verbose_name_plural = "Партнеры"
 
     def __str__(self):
         return self.name
@@ -104,12 +104,13 @@ class Office(models.Model):
         ('yandex#publicMap', 'Народная'),
         ('yandex#publicMapHybrid', 'Народная+Гибрид'),
     )
-
     name = models.CharField("Название компании", max_length=100)
     address = models.CharField("Контактный адресс", max_length=100)
     email = models.EmailField("Контактная почта", max_length=50, blank=True)
     phone1 = models.CharField("Телефон Офис", max_length=15, blank=True)
     phone2 = models.CharField("Телефон Тех.поддержки", max_length=15, blank=True)
+    description = models.TextField("Метаописание сайта", max_length=200, blank=True)
+    keywords = models.TextField("Ключевые слова для поиска", max_length=200, blank=True)
     latitude = models.CharField("Широта", max_length=10)
     longitude = models.CharField("Долгота", max_length=10)
     maptype = models.CharField("Тип карты", max_length=30, choices=MAP_CHOICES, default='yandex#map')
@@ -143,15 +144,13 @@ class SocialWidget(models.Model):
         ('yt', 'YouTube'),
         ('in', 'Instagram'),
     )
+    office = models.ForeignKey(Office)
     name = models.CharField("Название", max_length=2, choices=SOCIAL_CHOICES)
     url = models.URLField("Ссылка", blank=True)
 
     class Meta():
         verbose_name = "Социальный виджет"
         verbose_name_plural = "Социальные виджеты"
-
-    def __str__(self):
-        return self.name
 
 
 class Price(models.Model):

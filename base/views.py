@@ -102,18 +102,7 @@ def home(request):
 def blog(request):
     blog_list = Blog.objects.order_by('-pub_date')
     paginator = Paginator(blog_list, 10)
-
     if request.GET.get('blog'):
-        blog_article = request.GET.get('blog')
-        try:
-            blogs = Blog.objects.get(pk=blog_article)
-        except PageNotAnInteger:
-            blogs = paginator.page(1)
-        data = {
-            'blogs': blogs,
-            'widgets': SocialWidget.objects.all(),
-            'office': Office.objects.get(pk=1),
-        }
         return redirect('blog_article')
     else:
         page = request.GET.get('page')
@@ -131,8 +120,12 @@ def blog(request):
 
 
 def blog_article(request, article):
+    try:
+        blogs = Blog.objects.get(pk=article)
+    except PageNotAnInteger:
+        return redirect('blog')
     data = {
-        'blog': Blog.objects.get(pk=article),
+        'blog': blogs,
     }
     data.update(template_dict)
     return render(request, 'base/blog_article.html', data)
@@ -184,7 +177,6 @@ def reviews(request):
     data = {
         'reviews': Review.objects.all(),
         'projects': projects,
-        # 'projects_images': ProjectImage.objects.select_related().all(),
     }
     data.update(template_dict)
     if request.method == 'POST':

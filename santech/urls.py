@@ -7,7 +7,6 @@ from django.conf import settings
 from django.contrib.sitemaps.views import sitemap
 
 urlpatterns = [
-    # url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', views.home, name='home'),
     url(r'^blog/$', views.blog, name='blog'),

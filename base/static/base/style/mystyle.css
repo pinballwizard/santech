@@ -198,3 +198,59 @@ img{
     display: inline;
     vertical-align: middle;
 }
+.s-l{
+    display: inline-block;
+    height: 33px;
+    width: 33px;
+    background: url('../images/ikonki-small.png') no-repeat;
+    cursor: pointer;
+}
+.vk{
+    background-position: -137px -55px;
+}
+.vk:hover,
+.vk:active{
+    background-position: -137px -10px;
+}
+.ok{
+    background-position: -178px -55px;
+}
+.ok:hover,
+.ok:active{
+    background-position: -178px -10px;
+}
+.fb{
+    background-position: -12px -55px;
+}
+.fb:hover,
+.fb:active{
+    background-position: -12px -10px;
+}
+.tw{
+    background-position: -53px -55px;
+}
+.tw:hover,
+.tw:active{
+    background-position: -53px -10px;
+}
+.li{
+    background-position: -95px -55px;
+}
+.li:hover,
+.li:active{
+    background-position: -95px -10px;
+}
+.yt{
+    background-position: -220px -55px;
+}
+.yt:hover,
+.yt:active{
+    background-position: -220px -10px;
+}
+.in{
+    background-position: -261px -55px;
+}
+.in:hover,
+.in:active{
+    background-position: -261px -10px;
+}
