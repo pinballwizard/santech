@@ -8,40 +8,42 @@
     <div class="row">
         <div class="col-md-3">
             <div class="page-header text-center">
-                <h3>Цены<br>
+                <h3>
                     <small>В данном разделе представлены актуальные предложения компании</small>
                 </h3>
             </div>
         </div>
         <div class="col-md-6">
-            <div class="panel panel-info">
+            <div class="panel panel-price panel-default">
                 <div class="panel-heading"><b>Цены</b></div>
                 <table class="table">
                     <tr>
                         <th>Название</th>
-                        <th>Цена в рублях</th>
+                        <th class="text-right">Цена в рублях</th>
                     </tr>
                     {% for item in prices %}
                         <tr>
                             <td>
                                 {{ item.name }}
                                 {% if item.sale == True %}
-                                    <span class="glyphicon glyphicon-gift"></span>
                                 {% endif %}
                             </td>
-                            <td>{{ item.price }}</td>
+                            <td class="text-right">
+                                {{ item.price }}
+                                <span class="glyphicon glyphicon-gift"></span>
+                            </td>
                         </tr>
                     {% endfor %}
                 </table>
             </div>
         </div>
-        <div class="col-md-3">
+        <aside class="col-md-3">
             <div class="alert alert-info text-center">
                 Еще больше информации о скидках и
                 акциях нашей компании Вы можете узнать, позвонив по телефону<br>
                 {{ office.phone1 }}
                 или связавшись с нами через <b><a href="{% url 'contacts' %}">сайт</a></b>
             </div>
-        </div>
+        </aside>
     </div>
 {% endblock body %}

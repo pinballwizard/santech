@@ -18,7 +18,7 @@
                 <div class="panel-body">
                     {{ blog.text|safe|truncatewords_html:50 }}
                     <a href="{% url 'blog_article' blog.pk %}">
-                        <button class="btn btn-primary pull-right" type="button">Читать далее</button>
+                        <button class="btn readmore-btn pull-right" type="button">Читать далее</button>
                     </a>
                 </div>
             </div>
@@ -29,17 +29,17 @@
             <span class="step-links">
                 <ul class="pagination pagination-lg">
                     {% if blogs.has_previous %}
-                        <li class="previous">
-                            <a href="?page={{ blogs.previous_page_number }}" aria-label="Previous">
+                        <li class="previous readmore-btn">
+                            <a href="?page={{ blogs.previous_page_number }}" aria-label="Previous" class="readmore-btn">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
                     {% endif %}
                     {% for page in blogs.paginator.page_range %}
-                        <li {% if page == blogs.number %}class="active"{% endif %}><a href="?page={{ page }}">{{ page }}</a></li>
+                        <li {% if page == blogs.number %}class="active readmore-btn"{% endif %}><a href="?page={{ page }}" class="readmore-btn">{{ page }}</a></li>
                     {% endfor %}
                     {% if blogs.has_next %}
-                        <li class="next">
+                        <li class="next readmore-btn">
                             <a href="?page={{ blogs.next_page_number }}" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
                             </a>
