@@ -140,18 +140,18 @@
     <footer class="footer">
         <div class="container">
             <div class="row">
-                <div class="col-md-3 hidden-xs hidden-sm col-md-offset-2">
+                <div class="col-sm-3 col-sm-offset-2">
                     {{ office.name }}<br>
                     Адрес: {{ office.address }}<br>
                     Телефон: {{ office.phone1 }}
                 </div>
-                <div class="col-md-2 col-xs-6 text-center">
+                <div class="col-sm-2 hidden-sm hidden-xs text-center">
                     Мы в социальных сетях:<br>
                     {% for widget in widgets %}
                         <div class="s-l {{ widget.name }}"><a href="{{ widget.url }}"></a></div>
                     {% endfor %}
                 </div>
-                <div class="col-md-3 col-xs-6 hidden-xs hidden-sm text-right">
+                <div class="col-sm-3 hidden-xs text-right">
                     <span>2015<br> created by
                         <a href="https://github.com/craby-c">craby</a> &
                         <a href="https://github.com/pinballwizard">pinballwizard</a>
