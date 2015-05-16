@@ -9,11 +9,11 @@
         <div class="panel-heading">
             <h2 class="panel-title text-center">{{ service.header }}</h2>
         </div>
-        <div class="panel-body">
-            <p class="text-justify">{{ service.text|safe }}</p>
-            <a href="{% url 'services' %}">
-                <button class="btn readmore-btn pull-right" type="button">Назад</button>
-            </a>
+        <div class="panel-body text-justify">
+            {{ service.text|safe }}
         </div>
+        <a href="{% url 'services' %}">
+            <button class="btn readmore-btn pull-right" type="button">Назад</button>
+        </a>
     </div>
 {% endblock body %}

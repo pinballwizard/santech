@@ -5,9 +5,6 @@
     <meta name="Keywords" content="{% for blog in blogs %}{{ blog.name }},{% endfor %}">
 {% endblock meta %}
 {% block body %}
-    <div class="jumbotron text-center">
-        <h3>Новости</h3>
-    </div>
     {% for blog in blogs %}
         <div class="col-md-12">
             <div class="panel">

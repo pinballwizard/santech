@@ -25,12 +25,12 @@
                         <tr>
                             <td>
                                 {{ item.name }}
-                                {% if item.sale == True %}
-                                {% endif %}
                             </td>
                             <td class="text-right">
                                 {{ item.price }}
-                                <span class="glyphicon glyphicon-gift"></span>
+                                {% if item.sale == True %}
+                                    <span class="glyphicon glyphicon-gift"></span>
+                                {% endif %}
                             </td>
                         </tr>
                     {% endfor %}

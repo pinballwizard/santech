@@ -8,15 +8,15 @@
     <header class="big-header">
         <div class="overlay"></div>
         <div class="container">
-            <div class="row">
-                <div class="col-md-2">
+            <div class="row text-center text-nowrap">
+                <div class="col-md-2 hidden-xs hidden-sm">
                     <img src="{% static 'base/images/bath1.png' %}" class="img-responsive">
                 </div>
-                <div class="col-md-4 text-center">
+                <div class="col-md-4 col-xs-6">
                     <h1 class="firm-name">{{ office.name }}</h1>
                     Сантехмонтаж в Красноярске<br>
                 </div>
-                <div class="col-md-4 text-center">
+                <div class="col-md-4 col-xs-6">
                     <span class="phone">Офис: {{ office.phone1 }}<br>
                     Техник: {{ office.phone2 }}</span><br>
                     <div class="border">
@@ -53,7 +53,7 @@
                     <a href="{% url 'services_article' service.pk %}">
                         <div class="omsqt2">
                             <h3 class="text-center">{{ service.header }}</h3>
-                            <p class="text-justify">{{ service.text|safe|truncatewords:20 }}</p>
+                            <div class="text-justify">{{ service.text|safe|truncatewords:20 }}</div>
                         </div>
                     </a>
                     <img class="" src="{{ service.image.url }}" width="100%" height="200px"/>
@@ -64,7 +64,7 @@
                     <a href="{% url 'services_article' service.pk %}">
                         <div class="omsqt">
                             <h3 class="text-center">{{ service.header }}</h3>
-                            <p class="text-justify">{{ service.text|safe|truncatewords:20 }}</p>
+                            <div class="text-justify">{{ service.text|safe|truncatewords:20 }}</div>
                         </div>
                     </a>
                 </div>
