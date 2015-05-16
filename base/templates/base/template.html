@@ -22,8 +22,9 @@
             <div class="overlay"></div>
             <div class="container">
                 <div class="row text-center text-nowrap">
-                    <div class="col-xs-3 col-xs-offset-2 big-square firm-name">
-                        {{ office.name }}
+                    <div class="col-xs-3 col-xs-offset-2">
+                        <span class="firm-name">{{ office.name }}</span><br>
+                        <span>Сантехмонтаж в Красноярске</span>
                     </div>
                     <div class="col-xs-2">
                         <div class="border">
@@ -32,8 +33,10 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-xs-3 big-square phone">
+                    <div class="col-xs-3 phone">
+                        <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
                         {{ office.phone1 }} <br>
+                        <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
                         {{ office.phone2 }}
                     </div>
                 </div>
